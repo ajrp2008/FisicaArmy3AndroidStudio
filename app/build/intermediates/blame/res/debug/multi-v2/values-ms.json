@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "C:\\Users\\ajrp\\Documents\\android\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-ms\\values-ms.xml",
+            "outputFile": "C:\\Users\\ajrp\\Documents\\FisicaArmy3AndroidStudio\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-ms\\values-ms.xml",
             "map": [
                 {
                     "source": "C:\\Users\\ajrp\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.0.2.aar\\0d4ef8ad94922ce731efaf97d4c6bc8e\\res\\values-ms\\values-ms.xml",

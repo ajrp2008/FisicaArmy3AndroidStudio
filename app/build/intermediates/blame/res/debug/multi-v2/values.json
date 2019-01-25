@@ -1,8 +1,27 @@
 {
     "logs": [
         {
-            "outputFile": "C:\\Users\\ajrp\\Documents\\android\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values\\values.xml",
+            "outputFile": "C:\\Users\\ajrp\\Documents\\FisicaArmy3AndroidStudio\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values\\values.xml",
             "map": [
+                {
+                    "source": "C:\\Users\\ajrp\\Documents\\FisicaArmy3AndroidStudio\\app\\src\\main\\res\\values\\styles.xml",
+                    "from": {
+                        "startLines": "1",
+                        "startColumns": "0",
+                        "startOffsets": "12",
+                        "endLines": "6",
+                        "endColumns": "8",
+                        "endOffsets": "320"
+                    },
+                    "to": {
+                        "startLines": "1871",
+                        "startColumns": "4",
+                        "startOffsets": "124368",
+                        "endLines": "1876",
+                        "endColumns": "8",
+                        "endOffsets": "124676"
+                    }
+                },
                 {
                     "source": "C:\\Users\\ajrp\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.0.2.aar\\0d4ef8ad94922ce731efaf97d4c6bc8e\\res\\values\\values.xml",
                     "from": {
@@ -37,25 +56,6 @@
                         "startOffsets": "23520,23730,23869,23916,23971,24258,24312,24364,24413,24474",
                         "endColumns": "39,42,46,54,44,53,51,48,60,49",
                         "endOffsets": "23555,23768,23911,23966,24011,24307,24359,24408,24469,24519"
-                    }
-                },
-                {
-                    "source": "C:\\Users\\ajrp\\Documents\\android\\app\\src\\main\\res\\values\\styles.xml",
-                    "from": {
-                        "startLines": "1",
-                        "startColumns": "0",
-                        "startOffsets": "12",
-                        "endLines": "6",
-                        "endColumns": "8",
-                        "endOffsets": "320"
-                    },
-                    "to": {
-                        "startLines": "1871",
-                        "startColumns": "4",
-                        "startOffsets": "124368",
-                        "endLines": "1876",
-                        "endColumns": "8",
-                        "endOffsets": "124676"
                     }
                 },
                 {

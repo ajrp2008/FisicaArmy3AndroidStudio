@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "C:\\Users\\ajrp\\Documents\\android\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-v23\\values-v23.xml",
+            "outputFile": "C:\\Users\\ajrp\\Documents\\FisicaArmy3AndroidStudio\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-v23\\values-v23.xml",
             "map": [
                 {
                     "source": "C:\\Users\\ajrp\\.gradle\\caches\\transforms-1\\files-1.1\\wearable-2.1.0.aar\\9c9059e00af5f255b3ac937f84d91cff\\res\\values-v23\\values.xml",
