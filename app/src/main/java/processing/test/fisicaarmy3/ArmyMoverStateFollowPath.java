@@ -8,7 +8,6 @@ import processing.core.PVector;
 
 class ArmyMoverStateFollowPath implements ArmyMoverState {
 
-  private FisicaArmy3 fisicaArmy3;
   boolean approveRoute = false;
 
 ArmyMover armyMover;
@@ -20,8 +19,7 @@ ArrayList<PVector> wayPoints = new ArrayList<PVector>();
 PVector nextPoint;
 
 
-ArmyMoverStateFollowPath(FisicaArmy3 fisicaArmy3, ArmyMover armyMover) {
-  this.fisicaArmy3 = fisicaArmy3;
+ArmyMoverStateFollowPath(ArmyMover armyMover) {
   this.armyMover = armyMover;
 }
 

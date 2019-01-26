@@ -7,14 +7,13 @@ import processing.core.PVector;
 
 class SoldiersMover {
 
-    private FisicaArmy3 fisicaArmy3;
     ArmyMover armyMover;
 
 String              name;
 
 SoldiersMoveState           armyState;
 SoldiersMoveState           armyMarch            = new SoldiersMoverStateMarch(this);
-SoldiersMoveState           armyWar              = new SoldiersMoverStateWar(fisicaArmy3, this);
+SoldiersMoveState           armyWar              = new SoldiersMoverStateWar(this);
 SoldiersMoveState           armyRetreat          = new SoldiersMoverStateRetreat(this);
 
 ArrayList<Soldier> soldiers             = new ArrayList<Soldier>();
@@ -24,14 +23,13 @@ float               heading              = 0;
 int                 armySize             = 25;
 float               r,g,b;
 
-SoldiersMover(FisicaArmy3 fisicaArmy3, float x, float y, String name, float r, float g, float b){
-    this.fisicaArmy3 = fisicaArmy3;
+SoldiersMover(float x, float y, String name, float r, float g, float b){
     armyState = armyMarch;
   absolutPosition.set(x,y);
   this.r = r; this.g = g; this.b = b;
   this.name = name;
-  fisicaArmy3.createSoldiers(this);
-  fisicaArmy3.initSquareFormation(this);
+  FisicaArmy3.fiscaArmy3.createSoldiers(this);
+  FisicaArmy3.fiscaArmy3.initSquareFormation(this);
 }
 
 public PVector meanSoldierPosition(){

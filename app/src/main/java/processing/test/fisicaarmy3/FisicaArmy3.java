@@ -40,13 +40,13 @@ public void initGame(){
   world.setGravity(0,0);
   ellipseMode(CENTER);
   GameConstants.initGameConstants();
-  armySelector    = new ArmySelector(this);
-  armySelector.addArmy(new ArmyMover(this, new SoldiersMover(this, 100,100,"A",0,255,0)));
-  armySelector.addArmy(new ArmyMover(this, new SoldiersMover(this, 200,150,"B",255,255,255)));
-  armySelector.addArmy(new ArmyMover(this, new SoldiersMover(this, 100,200,"C",200,0,0)));
-  armySelector.addArmy(new ArmyMover(this, new SoldiersMover(this, 400,100,"D",0,255,0)));
-  armySelector.addArmy(new ArmyMover(this, new SoldiersMover(this, 600,150,"E",255,255,255)));
-  armySelector.addArmy(new ArmyMover(this, new SoldiersMover(this, 400,200,"F",200,0,0)));
+  armySelector    = new ArmySelector();
+  armySelector.addArmy(new ArmyMover(new SoldiersMover(100,100,"A",0,255,0)));
+  armySelector.addArmy(new ArmyMover(new SoldiersMover(200,150,"B",255,255,255)));
+  armySelector.addArmy(new ArmyMover(new SoldiersMover(100,200,"C",200,0,0)));
+  armySelector.addArmy(new ArmyMover(new SoldiersMover(400,100,"D",0,255,0)));
+  armySelector.addArmy(new ArmyMover(new SoldiersMover(600,150,"E",255,255,255)));
+  armySelector.addArmy(new ArmyMover(new SoldiersMover(400,200,"F",200,0,0)));
  //Initial zoom based on screen size
   zoomMap(4);
   

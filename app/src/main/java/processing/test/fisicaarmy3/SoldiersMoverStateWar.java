@@ -5,7 +5,6 @@ import processing.core.PVector;
 
 class SoldiersMoverStateWar implements SoldiersMoveState {
 
-  private FisicaArmy3 fisicaArmy3;
   SoldiersMover army;
   FContact firstContact;
   PVector positionContact = new PVector();
@@ -14,8 +13,7 @@ class SoldiersMoverStateWar implements SoldiersMoveState {
   int       colisionFrame  = 50;
 
 
-  SoldiersMoverStateWar(FisicaArmy3 fisicaArmy3, SoldiersMover army) {
-    this.fisicaArmy3 = fisicaArmy3;
+  SoldiersMoverStateWar(SoldiersMover army) {
     this.army = army;
   }
 

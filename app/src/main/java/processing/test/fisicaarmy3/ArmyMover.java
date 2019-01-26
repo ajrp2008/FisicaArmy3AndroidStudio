@@ -4,20 +4,18 @@ import fisica.FContact;
 
 class ArmyMover {
 
-  private FisicaArmy3 fisicaArmy3;
   float armySelectorSize   = GameConstants.armySelectorSizeStart;
 
 
-  ArmyMoverStateFollowPath   moverStateFollowPath = new ArmyMoverStateFollowPath(fisicaArmy3, this);
-  ArmyMoverStateWar          moverStateWar        = new ArmyMoverStateWar(fisicaArmy3, this);
-  ArmyMoverStateRetreat      moverStateRetreat    = new ArmyMoverStateRetreat(fisicaArmy3, this);
+  ArmyMoverStateFollowPath   moverStateFollowPath = new ArmyMoverStateFollowPath(this);
+  ArmyMoverStateWar          moverStateWar        = new ArmyMoverStateWar(this);
+  ArmyMoverStateRetreat      moverStateRetreat    = new ArmyMoverStateRetreat(this);
 
   ArmyMoverState             moverState           = moverStateFollowPath;
 
   SoldiersMover              soldierMover;
 
-  ArmyMover(FisicaArmy3 fisicaArmy3, SoldiersMover army) {
-    this.fisicaArmy3 = fisicaArmy3;
+  ArmyMover(SoldiersMover army) {
     this.soldierMover = army;
     this.soldierMover.armyMover = this;
   }

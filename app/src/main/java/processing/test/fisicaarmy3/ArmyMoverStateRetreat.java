@@ -6,13 +6,11 @@ import processing.core.PVector;
 
 class ArmyMoverStateRetreat implements ArmyMoverState{
 
-  private FisicaArmy3 fisicaArmy3;
   PVector retreatToLocation = new PVector();
 
   ArmyMover armyMover;
 
-  ArmyMoverStateRetreat(FisicaArmy3 fisicaArmy3, ArmyMover armyMover){
-    this.fisicaArmy3 = fisicaArmy3;
+  ArmyMoverStateRetreat(ArmyMover armyMover){
     this.armyMover = armyMover;
   }
 
