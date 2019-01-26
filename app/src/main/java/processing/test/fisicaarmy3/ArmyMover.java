@@ -7,11 +7,11 @@ class ArmyMover {
     float armySelectorSize = GameConstants.armySelectorSizeStart;
 
 
-    ArmyMoverStateMarch moverStateFollowPath = new ArmyMoverStateMarch(this);
+    private ArmyMoverStateMarch moverStateFollowPath = new ArmyMoverStateMarch(this);
     private ArmyMoverStateWar moverStateWar = new ArmyMoverStateWar(this);
     private ArmyMoverStateRetreat moverStateRetreat = new ArmyMoverStateRetreat(this);
 
-    ArmyMoverState moverState = moverStateFollowPath;
+    private ArmyMoverState moverState = moverStateFollowPath;
 
     SoldiersMover soldierMover;
 
@@ -58,7 +58,7 @@ class ArmyMover {
     }
 
     void changeToRetreatState(float x, float y){
-        moverStateRetreat.retreatToLocation.set(x,y);
+        moverStateRetreat.setRetreatLocation(x,y);
         moverState   = moverStateRetreat;
         soldierMover.changeToRetreatState(x,y);
     }

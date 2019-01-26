@@ -10,10 +10,10 @@ class ArmyMoverStateMarch implements ArmyMoverState {
 
   boolean approveRoute = false;
 
-  ArmyMover armyMover;
+  private ArmyMover armyMover;
 
 
-  float wayPointsGap = GameConstants.wayPointGapStart;
+  private float wayPointsGap = GameConstants.wayPointGapStart;
 
   ArrayList<PVector> wayPoints = new ArrayList<PVector>();
   PVector nextPoint;
@@ -117,14 +117,14 @@ class ArmyMoverStateMarch implements ArmyMoverState {
       FisicaArmy3.fiscaArmy3.vertex(msp.x, msp.y);
       FisicaArmy3.fiscaArmy3.vertex(armyMover.soldierMover.absolutPosition.x, armyMover.soldierMover.absolutPosition.y);
       for (PVector p : wayPoints) {
-        if (!armyMover.soldierMover.isStateWar()) {
+        if (armyMover.soldierMover.isStateWar()) {
           FisicaArmy3.fiscaArmy3.vertex(p.x, p.y);
         }
       }
       FisicaArmy3.fiscaArmy3.endShape();
       FisicaArmy3.fiscaArmy3.ellipse(armyMover.soldierMover.absolutPosition.x, armyMover.soldierMover.absolutPosition.y, 3, 3);
       for (PVector p : wayPoints) {
-        if (!armyMover.soldierMover.isStateWar()) {
+        if (armyMover.soldierMover.isStateWar()) {
           FisicaArmy3.fiscaArmy3.ellipse(p.x, p.y, 3, 3);
 
           if (wayPoints.indexOf(p) >= (wayPoints.size() - 1)) {

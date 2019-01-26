@@ -11,7 +11,7 @@ class SoldiersMover {
 
     String name;
 
-    SoldiersMoveState armyState;
+    private SoldiersMoveState armyState;
     private SoldiersMoverStateMarch armyMarch = new SoldiersMoverStateMarch(this);
     private SoldiersMoverStateWar armyWar = new SoldiersMoverStateWar(this);
     private SoldiersMoverStateRetreat armyRetreat = new SoldiersMoverStateRetreat(this);
@@ -87,7 +87,7 @@ class SoldiersMover {
     }
 
     boolean isStateWar(){
-        return (this.armyState == this.armyWar);
+        return (this.armyState != this.armyWar);
     }
 
     void changeToRetreatState(float x, float y) {

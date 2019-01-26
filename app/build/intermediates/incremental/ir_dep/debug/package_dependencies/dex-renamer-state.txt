@@ -1,4 +1,4 @@
-#Sat Jan 26 22:47:04 CET 2019
+#Sat Jan 26 23:21:42 CET 2019
 base.0=C\:\\Users\\ajrp\\Documents\\FisicaArmy3AndroidStudio\\app\\build\\intermediates\\transforms\\dexMerger\\debug\\10
 path.0=classes.dex
 renamed.0=classes.dex

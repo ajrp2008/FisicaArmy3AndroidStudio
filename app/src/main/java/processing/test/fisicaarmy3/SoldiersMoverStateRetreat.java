@@ -5,7 +5,7 @@ import processing.core.PVector;
 
 class SoldiersMoverStateRetreat implements SoldiersMoveState {
 
-      SoldiersMover army;
+    private SoldiersMover army;
   PVector retreatToLocation = new PVector();
 
   SoldiersMoverStateRetreat(SoldiersMover army){

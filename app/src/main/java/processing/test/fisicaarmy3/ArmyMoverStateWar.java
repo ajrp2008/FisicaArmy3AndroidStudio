@@ -6,9 +6,9 @@ import processing.core.PVector;
 
 class ArmyMoverStateWar implements ArmyMoverState {
 
-    PVector retreatToLocation = null;
+    private PVector retreatToLocation = null;
 
-    ArmyMover armyMover;
+    private ArmyMover armyMover;
 
     ArmyMoverStateWar(ArmyMover armyMover) {
         this.armyMover = armyMover;

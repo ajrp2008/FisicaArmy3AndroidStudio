@@ -11,7 +11,7 @@ class Soldier extends FCircle {
 
   boolean  isAlive        = true;
 
-  float    speed          = GameConstants.soldierSpeedStart;
+  private float    speed          = GameConstants.soldierSpeedStart;
 
   Soldier(SoldiersMover army, PVector relPos) {
     super(GameConstants.soldierSizeStart);

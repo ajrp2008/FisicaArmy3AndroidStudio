@@ -5,9 +5,9 @@ class Button {
   private FisicaArmy3 fisicaArmy3;
   boolean isPressed = false;
 
-  float x,y,w,h;
-  float r=100,g=0,b=0;
-  String text;
+  private float x,y,w,h;
+  private float r=100,g=0,b=0;
+  private String text;
 
   Button(FisicaArmy3 fisicaArmy3, float x, float y, float w, float h){
     this.fisicaArmy3 = fisicaArmy3;

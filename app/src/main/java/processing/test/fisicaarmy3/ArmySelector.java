@@ -5,72 +5,70 @@ import java.util.ArrayList;
 import processing.core.PVector;
 
 class ArmySelector {
-    private float                 armySelectorSize  = GameConstants.armySelectorSizeStart;
-    private ArmyMover             selectedArmy      = null;
-    private ArrayList<ArmyMover> armyList          = new ArrayList<ArmyMover>();
+    private float armySelectorSize = GameConstants.armySelectorSizeStart;
+    private ArmyMover selectedArmy = null;
+    private ArrayList<ArmyMover> armyList = new ArrayList<ArmyMover>();
 
-  ArmySelector() {
-  }
-
-  void addArmy(ArmyMover a) {
-    armyList.add(a);
-  }
-
-  boolean selectArmy(float x, float y) {
-    ArmyMover newSelectedArmy = null;
-
-    for (ArmyMover a : armyList) {
-      ArmyMover selected =a.firstSelectionArmy(x,y);
-      if(selected!=null)  newSelectedArmy = selected;
+    ArmySelector() {
     }
 
-    if(selectedArmy != null) selectedArmy.secondSelection(x,y);
-
-
-    selectedArmy = newSelectedArmy;
-
-
-    return selectedArmy != null;
-  }
-
-  boolean dragFromArmy(float x, float y) {
-    if (selectedArmy!=null) {
-      selectedArmy.dragFromArmy(x, y);
+    void addArmy(ArmyMover a) {
+        armyList.add(a);
     }
-    return    selectedArmy != null;
-  }
 
-  void updateWithZoomFactor() {
-    armySelectorSize *= GameConstants.zoomFactor;
-    for (ArmyMover ap : this.armyList) {
-      ap.updateWithZoomFactor();
+    boolean selectArmy(float x, float y) {
+        ArmyMover newSelectedArmy = null;
+
+        for (ArmyMover a : armyList) {
+            ArmyMover selected = a.firstSelectionArmy(x, y);
+            if (selected != null) newSelectedArmy = selected;
+        }
+        if (selectedArmy != null) selectedArmy.secondSelection(x, y);
+
+        selectedArmy = newSelectedArmy;
+
+        return selectedArmy != null;
     }
-  }
 
-  void updateMapPosition(float dx, float dy) {
-    for (ArmyMover ap : armyList) {
-      ap.updateMapPosition(dx,dy);
+    boolean dragFromArmy(float x, float y) {
+        if (selectedArmy != null) {
+            selectedArmy.dragFromArmy(x, y);
+        }
+        return selectedArmy != null;
     }
-  }
 
-  void update() {
-    for (ArmyMover a : armyList) {
-      a.update();
+    void updateWithZoomFactor() {
+        armySelectorSize *= GameConstants.zoomFactor;
+        for (ArmyMover ap : this.armyList) {
+            ap.updateWithZoomFactor();
+        }
     }
-  }
 
-  void drawSelector() {
-    for (ArmyMover a : armyList) {
+    void updateMapPosition(float dx, float dy) {
+        for (ArmyMover ap : armyList) {
+            ap.updateMapPosition(dx, dy);
+        }
+    }
 
-     // if(a==selectedArmy)continue;
-      a.display(a == selectedArmy);
-      //CENTER OF ARMY///////////////////////////
-      PVector msp = a.soldierMover.meanSoldierPosition();
-        FisicaArmy3.fiscaArmy3.noStroke();
-      if(a == selectedArmy) FisicaArmy3.fiscaArmy3.fill(255,255,0,100);else FisicaArmy3.fiscaArmy3.fill(30,0,0,100);
-        FisicaArmy3.fiscaArmy3.ellipse(msp.x, msp.y, armySelectorSize, armySelectorSize);
-        FisicaArmy3.fiscaArmy3.stroke(255,0,0);
-      if(a == selectedArmy){
+    void update() {
+        for (ArmyMover a : armyList) {
+            a.update();
+        }
+    }
+
+    void drawSelector() {
+        for (ArmyMover a : armyList) {
+
+            // if(a==selectedArmy)continue;
+            a.display(a == selectedArmy);
+            //CENTER OF ARMY///////////////////////////
+            PVector msp = a.soldierMover.meanSoldierPosition();
+            FisicaArmy3.fiscaArmy3.noStroke();
+            if (a == selectedArmy) FisicaArmy3.fiscaArmy3.fill(255, 255, 0, 100);
+            else FisicaArmy3.fiscaArmy3.fill(30, 0, 0, 100);
+            FisicaArmy3.fiscaArmy3.ellipse(msp.x, msp.y, armySelectorSize, armySelectorSize);
+            FisicaArmy3.fiscaArmy3.stroke(255, 0, 0);
+     /* if(a == selectedArmy){
           FisicaArmy3.fiscaArmy3.textSize(30); continue; }else FisicaArmy3.fiscaArmy3.textSize(15);
         FisicaArmy3.fiscaArmy3.text(a.soldierMover.name,msp.x+armySelectorSize/2, msp.y);
         FisicaArmy3.fiscaArmy3.text( ""+a.soldierMover.absolutPosition,msp.x+armySelectorSize/2, msp.y+30);
@@ -79,13 +77,13 @@ class ArmySelector {
         FisicaArmy3.fiscaArmy3.text( a.soldierMover.armyState.toString(),msp.x+armySelectorSize/2, msp.y+120);
         FisicaArmy3.fiscaArmy3.text( "Approveroute:"+a.moverStateFollowPath.approveRoute,msp.x+armySelectorSize/2, msp.y+150);
         FisicaArmy3.fiscaArmy3.text( "nextpoint:"+a.moverStateFollowPath.nextPoint,msp.x+armySelectorSize/2, msp.y+180);
-        FisicaArmy3.fiscaArmy3.text( "marching:"+a.soldierMover.isMarching(),msp.x+armySelectorSize/2, msp.y+210);
-      ///////////////////////////////////////////
+        FisicaArmy3.fiscaArmy3.text( "marching:"+a.soldierMover.isMarching(),msp.x+armySelectorSize/2, msp.y+210);*/
+        }
+
     }
 
-  }
-
-  void drawSelectedArmy(){
+    void drawSelectedArmy() {
+      /*
      ArmyMover a = selectedArmy;
       if(a==null)return;
       //CENTER OF ARMY///////////////////////////
@@ -99,13 +97,13 @@ class ArmySelector {
       FisicaArmy3.fiscaArmy3.text( ""+a.soldierMover.absolutPosition,msp.x+armySelectorSize/2, msp.y+30);
       FisicaArmy3.fiscaArmy3.text( "Start. "+ a.soldierMover.soldiers.size() + " Alive:"+a.soldierMover.armySizeAlive(),msp.x+armySelectorSize/2, msp.y+60);
       FisicaArmy3.fiscaArmy3.text( a.moverState.toString(),msp.x+armySelectorSize/2, msp.y+90);
-      FisicaArmy3.fiscaArmy3.text( a.soldierMover.armyState.toString(),msp.x+armySelectorSize/2, msp.y+120);
+      FisicaArmy3.fiscaArmy3.text( a.soldierMover.getStateName(),msp.x+armySelectorSize/2, msp.y+120);
       FisicaArmy3.fiscaArmy3.text( "Approveroute:"+a.moverStateFollowPath.approveRoute,msp.x+armySelectorSize/2, msp.y+150);
       FisicaArmy3.fiscaArmy3.text( "nextpoint:"+a.moverStateFollowPath.nextPoint,msp.x+armySelectorSize/2, msp.y+180);
       FisicaArmy3.fiscaArmy3.text( "marching:"+a.soldierMover.isMarching(),msp.x+armySelectorSize/2, msp.y+210);
       ///////////////////////////////////////////
+*/
 
-
-  }
+    }
 
 }

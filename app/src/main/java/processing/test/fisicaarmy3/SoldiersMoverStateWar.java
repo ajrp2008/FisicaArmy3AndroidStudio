@@ -5,12 +5,12 @@ import processing.core.PVector;
 
 class SoldiersMoverStateWar implements SoldiersMoveState {
 
-  SoldiersMover army;
+  private SoldiersMover army;
   FContact firstContact;
   PVector positionContact = new PVector();
 
-  int       frameCount;
-  int       colisionFrame  = 50;
+  private int       frameCount;
+  private int       colisionFrame  = 50;
 
 
   SoldiersMoverStateWar(SoldiersMover army) {

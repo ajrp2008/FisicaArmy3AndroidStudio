@@ -4,24 +4,20 @@ import fisica.FContact;
 
 interface ArmyMoverState {
 
-  public ArmyMover firstSelectionArmy(float x, float y);
+  ArmyMover firstSelectionArmy(float x, float y);
 
-  public void dragFromArmy(float x, float y);
+  void dragFromArmy(float x, float y);
 
-  public void secondSelection(float x, float y);
+  void secondSelection(float x, float y);
 
+  void update();
 
-  public void update();
+  void display(boolean selected);
 
-  public void display(boolean selected);
+  void updateWithZoomFactor();
 
+  void updateMapPosition(float dx, float dy);
 
-
-  public void updateWithZoomFactor();
-
-  public void updateMapPosition(float dx, float dy);
-
-  public void contactStarted(FContact c);
-
+  void contactStarted(FContact c);
 
 }

@@ -4,18 +4,18 @@ import fisica.FContact;
 
 interface SoldiersMoveState {
 
-    public void commandArmyPosition(float x, float y);
+    void commandArmyPosition(float x, float y);
 
-    public void commandArmyHeading(float x, float y);
+    void commandArmyHeading(float x, float y);
 
-    public void updateArmySoldiers();
+    void updateArmySoldiers();
 
-    public void updateState();
+    void updateState();
 
-    public boolean isMarching();
+    boolean isMarching();
 
-    public void contactStarted(FContact c);
+    void contactStarted(FContact c);
 
-    public void updateArmyToZoom();
+    void updateArmyToZoom();
 
 }
