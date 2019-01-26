@@ -5,7 +5,7 @@ import processing.core.PVector;
 
 class SoldiersMoverStateMarch implements SoldiersMoveState{
 
-SoldiersMover army;
+  private SoldiersMover army;
 
 SoldiersMoverStateMarch(SoldiersMover army){
   this.army = army;
@@ -48,12 +48,8 @@ public boolean isMarching(){
 }
 
 public void contactStarted(FContact c){
-  army.armyWar.contactStarted(c);
-  army.armyState      = army.armyWar;
-//   collisionDetected=true;
+  this.army.changeToWarState(c);
 }
 
-public void retreatTo(float x, float y){
-}
 
 }

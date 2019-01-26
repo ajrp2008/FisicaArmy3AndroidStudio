@@ -8,7 +8,7 @@ class ArmyMoverStateRetreat implements ArmyMoverState{
 
   PVector retreatToLocation = new PVector();
 
-  ArmyMover armyMover;
+  private ArmyMover armyMover;
 
   ArmyMoverStateRetreat(ArmyMover armyMover){
     this.armyMover = armyMover;
@@ -24,17 +24,9 @@ class ArmyMoverStateRetreat implements ArmyMoverState{
 
   public void update(){
         armyMover.soldierMover.updateArmy();
-              PVector msp = armyMover.soldierMover.meanSoldierPosition();
-
+        PVector msp = armyMover.soldierMover.meanSoldierPosition();
         if(PApplet.dist(retreatToLocation.x,retreatToLocation.y, msp.x,msp.y)<armyMover.armySelectorSize/2){
-
-          this.armyMover.soldierMover.armyState = this.armyMover.soldierMover.armyMarch;
-
-          ((ArmyMoverStateFollowPath)this.armyMover.moverStateFollowPath).wayPoints.clear();
-          ((ArmyMoverStateFollowPath)this.armyMover.moverStateFollowPath).approveRoute = false;
-          ((ArmyMoverStateFollowPath)this.armyMover.moverStateFollowPath).nextPoint = null;
-          this.armyMover.moverState = this.armyMover.moverStateFollowPath;
-
+          this.armyMover.changeToMarchState();
         }
   }
 

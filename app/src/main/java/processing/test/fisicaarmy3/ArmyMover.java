@@ -4,52 +4,72 @@ import fisica.FContact;
 
 class ArmyMover {
 
-  float armySelectorSize   = GameConstants.armySelectorSizeStart;
+    float armySelectorSize = GameConstants.armySelectorSizeStart;
 
 
-  ArmyMoverStateFollowPath   moverStateFollowPath = new ArmyMoverStateFollowPath(this);
-  ArmyMoverStateWar          moverStateWar        = new ArmyMoverStateWar(this);
-  ArmyMoverStateRetreat      moverStateRetreat    = new ArmyMoverStateRetreat(this);
+    ArmyMoverStateMarch moverStateFollowPath = new ArmyMoverStateMarch(this);
+    private ArmyMoverStateWar moverStateWar = new ArmyMoverStateWar(this);
+    private ArmyMoverStateRetreat moverStateRetreat = new ArmyMoverStateRetreat(this);
 
-  ArmyMoverState             moverState           = moverStateFollowPath;
+    ArmyMoverState moverState = moverStateFollowPath;
 
-  SoldiersMover              soldierMover;
+    SoldiersMover soldierMover;
 
-  ArmyMover(SoldiersMover army) {
-    this.soldierMover = army;
-    this.soldierMover.armyMover = this;
-  }
+    ArmyMover(SoldiersMover army) {
+        this.soldierMover = army;
+        this.soldierMover.armyMover = this;
+    }
 
-  public ArmyMover firstSelectionArmy(float x, float y){
-     return moverState.firstSelectionArmy(x,y);
-  }
+    ArmyMover firstSelectionArmy(float x, float y) {
+        return moverState.firstSelectionArmy(x, y);
+    }
 
-  public void secondSelection(float x, float y){
-     moverState.secondSelection(x,y);
-  }
+    void secondSelection(float x, float y) {
+        moverState.secondSelection(x, y);
+    }
 
-  public void update() {
-    moverState.update();
-  }
+    void update() {
+        moverState.update();
+    }
 
-  public void updateWithZoomFactor() {
-    moverState.updateWithZoomFactor();
-  }
+    void updateWithZoomFactor() {
+        moverState.updateWithZoomFactor();
+    }
 
-  public void updateMapPosition(float dx, float dy) {
-    moverState.updateMapPosition(dx,dy);
-  }
+    void updateMapPosition(float dx, float dy) {
+        moverState.updateMapPosition(dx, dy);
+    }
 
-  public void dragFromArmy(float x, float y) {
-    moverState.dragFromArmy(x, y);
-  }
+    void dragFromArmy(float x, float y) {
+        moverState.dragFromArmy(x, y);
+    }
 
-  public void display(boolean selected) {
-    moverState.display(selected);
-  }
+    void display(boolean selected) {
+        moverState.display(selected);
+    }
 
-  public void contactStarted(FContact c){
-    moverState.contactStarted(c);
-  }
+    public void contactStarted(FContact c) {
+        moverState.contactStarted(c);
+    }
+
+    void changeToWarState(FContact c){
+        soldierMover.contactStarted(c);
+        moverState = moverStateWar;
+    }
+
+    void changeToRetreatState(float x, float y){
+        moverStateRetreat.retreatToLocation.set(x,y);
+        moverState   = moverStateRetreat;
+        soldierMover.changeToRetreatState(x,y);
+    }
+
+    void changeToMarchState(){
+        soldierMover.changeToMarchState();
+        moverStateFollowPath.wayPoints.clear();
+        moverStateFollowPath.approveRoute = false;
+        moverStateFollowPath.nextPoint = null;
+        moverState = moverStateFollowPath;
+
+    }
 
 }

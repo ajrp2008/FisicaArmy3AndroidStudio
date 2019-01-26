@@ -69,15 +69,8 @@ class SoldiersMoverStateWar implements SoldiersMoveState {
       Soldier s2 = (Soldier)c.getBody2();
       s1.attack(s2);
       s2.attack(s1);
-
     }
   }
 
-  public void retreatTo(float x, float y){
-    this.firstContact = null;
-    ((SoldiersMoverStateRetreat)this.army.armyRetreat).retreatToLocation.set(x,y);
-    this.army.absolutPosition.set(x,y);
-    this.army.armyState = this.army.armyRetreat;
-  }
 
 }

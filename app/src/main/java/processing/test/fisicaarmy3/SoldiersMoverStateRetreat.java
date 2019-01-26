@@ -31,8 +31,6 @@ class SoldiersMoverStateRetreat implements SoldiersMoveState {
 
     public void contactStarted(FContact c){}
 
-    public void retreatTo(float x, float y){}
-
     public void updateArmyToZoom(){
      army.absolutPosition.mult(GameConstants.zoomFactor);
         for(Soldier s: army.soldiers){

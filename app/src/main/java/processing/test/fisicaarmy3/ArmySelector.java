@@ -5,19 +5,18 @@ import java.util.ArrayList;
 import processing.core.PVector;
 
 class ArmySelector {
-  float                 armySelectorSize  = GameConstants.armySelectorSizeStart;
+    private float                 armySelectorSize  = GameConstants.armySelectorSizeStart;
+    private ArmyMover             selectedArmy      = null;
+    private ArrayList<ArmyMover> armyList          = new ArrayList<ArmyMover>();
 
-  ArmyMover             selectedArmy      = null;
-  ArrayList<ArmyMover> armyList          = new ArrayList<ArmyMover>();
-
-  public ArmySelector() {
+  ArmySelector() {
   }
 
-  public void addArmy(ArmyMover a) {
+  void addArmy(ArmyMover a) {
     armyList.add(a);
   }
 
-  public boolean selectArmy(float x, float y) {
+  boolean selectArmy(float x, float y) {
     ArmyMover newSelectedArmy = null;
 
     for (ArmyMover a : armyList) {
@@ -34,33 +33,33 @@ class ArmySelector {
     return selectedArmy != null;
   }
 
-  public boolean dragFromArmy(float x, float y) {
+  boolean dragFromArmy(float x, float y) {
     if (selectedArmy!=null) {
       selectedArmy.dragFromArmy(x, y);
     }
     return    selectedArmy != null;
   }
 
-  public void updateWithZoomFactor() {
+  void updateWithZoomFactor() {
     armySelectorSize *= GameConstants.zoomFactor;
     for (ArmyMover ap : this.armyList) {
       ap.updateWithZoomFactor();
     }
   }
 
-  public void updateMapPosition(float dx, float dy) {
-    for (ArmyMover ap : FisicaArmy3.fiscaArmy3.armySelector.armyList) {
+  void updateMapPosition(float dx, float dy) {
+    for (ArmyMover ap : armyList) {
       ap.updateMapPosition(dx,dy);
     }
   }
 
-  public void update() {
+  void update() {
     for (ArmyMover a : armyList) {
       a.update();
     }
   }
 
-  public void drawSelector() {
+  void drawSelector() {
     for (ArmyMover a : armyList) {
 
      // if(a==selectedArmy)continue;
@@ -86,7 +85,7 @@ class ArmySelector {
 
   }
 
-  public void drawSelectedArmy(){
+  void drawSelectedArmy(){
      ArmyMover a = selectedArmy;
       if(a==null)return;
       //CENTER OF ARMY///////////////////////////

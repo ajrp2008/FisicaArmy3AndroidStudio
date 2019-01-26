@@ -6,7 +6,6 @@ import processing.core.PVector;
 
 class Soldier extends FCircle {
 
-  private FisicaArmy3 fisicaArmy3;
   PVector relPosition    =  new PVector();
   SoldiersMover army;
 
@@ -14,16 +13,15 @@ class Soldier extends FCircle {
 
   float    speed          = GameConstants.soldierSpeedStart;
 
-  Soldier(FisicaArmy3 fisicaArmy3, SoldiersMover army, PVector relPos) {
+  Soldier(SoldiersMover army, PVector relPos) {
     super(GameConstants.soldierSizeStart);
-    this.fisicaArmy3 = fisicaArmy3;
     this.army         = army;
     this.relPosition  = relPos;
     setPosition(army.absolutPosition.x + relPos.x, army.absolutPosition.y + relPos.y);
     setGrabbable(false);
     setDamping(0.25f);
     setName(army.name);
-    fisicaArmy3.world.add(this);
+    FisicaArmy3.fiscaArmy3.world.add(this);
   }
 
   public void updateSoldierSizeToZoom() {
@@ -55,7 +53,7 @@ class Soldier extends FCircle {
   public boolean isMarching() {
     float e = PApplet.dist(getX(), getY(), army.absolutPosition.x+relPosition.x, army.absolutPosition.y+relPosition.y);
     if (e > 3) {
-      PApplet.println(fisicaArmy3.frameCount+"I MARCH"+this.getVelocityX());
+      PApplet.println(FisicaArmy3.fiscaArmy3.frameCount+"I MARCH"+this.getVelocityX());
       return true;
     } else {
       return false;
@@ -63,12 +61,12 @@ class Soldier extends FCircle {
   }
 
   public void attack(Soldier opponent) {
-    int x = (int) fisicaArmy3.random(1, 100);
+    int x = (int) FisicaArmy3.fiscaArmy3.random(1, 100);
     //println("hit x:"+x);
     if (x<2) {
       //println("There is at hit :"+ x + "SOLDIER DEAD !!!");
       opponent.isAlive = false;
-      fisicaArmy3.world.remove(opponent);
+      FisicaArmy3.fiscaArmy3.world.remove(opponent);
      // opponent.army.soldiers.remove(opponent);
     }
   }
