@@ -6,6 +6,8 @@ import processing.core.PVector;
 class SoldiersMoverStateMarch implements SoldiersMoveState {
 
     private SoldiersMover army;
+    private float heading = 0;
+    private boolean isMarching = false;
 
     SoldiersMoverStateMarch(SoldiersMover army) {
         this.army = army;
@@ -19,17 +21,17 @@ class SoldiersMoverStateMarch implements SoldiersMoveState {
         PVector target = new PVector(x, y);
         PVector direction = target.sub(army.absolutPosition);
         for (Soldier s : army.soldiers) {
-            s.getRelPos().rotate(direction.heading() - army.heading);
+            s.getRelPos().rotate(direction.heading() - heading);
         }
-        army.heading = direction.heading();
+        heading = direction.heading();
     }
 
     public void updateArmySoldiers() {
-        army.isMarching = false;
+        isMarching = false;
         for (Soldier s : army.soldiers) {
             s.updatePosition();
             if (s.isMarching() && s.isAlive) {
-                army.isMarching = true;
+                isMarching = true;
             }
         }
     }
@@ -45,8 +47,13 @@ class SoldiersMoverStateMarch implements SoldiersMoveState {
         }
     }
 
+    @Override
+    public void updateMapPosition(float dx, float dy) {
+
+    }
+
     public boolean isMarching() {
-        return army.isMarching;
+        return isMarching;
     }
 
     public void contactStarted(FContact c) {

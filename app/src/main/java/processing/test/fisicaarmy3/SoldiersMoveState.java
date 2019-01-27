@@ -18,4 +18,6 @@ interface SoldiersMoveState {
 
     void updateArmyToZoom();
 
+    void updateMapPosition(float dx, float dy);
+
 }

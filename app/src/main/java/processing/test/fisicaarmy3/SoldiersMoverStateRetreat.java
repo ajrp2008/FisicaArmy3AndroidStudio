@@ -6,41 +6,50 @@ import processing.core.PVector;
 class SoldiersMoverStateRetreat implements SoldiersMoveState {
 
     private SoldiersMover army;
-  PVector retreatToLocation = new PVector();
+    private PVector retreatToLocation = new PVector();
 
-  SoldiersMoverStateRetreat(SoldiersMover army){
-    this.army = army;
-  }
-
-    public void commandArmyPosition(float x, float y){}
-
-    public void commandArmyHeading(float x, float y){}
-
-    public void updateArmySoldiers(){}
-
-    public void updateState(){
-        army.isMarching = false;
-    for(Soldier s: army.soldiers){
-      s.updatePosition();
-      if(s.isMarching()){army.isMarching=true;}
+    SoldiersMoverStateRetreat(SoldiersMover army) {
+        this.army = army;
     }
 
+    public void setRetreatLocation(float x, float y) {
+        retreatToLocation.set(x, y);
     }
 
-    public boolean isMarching(){return false;}
+    public void commandArmyPosition(float x, float y) {
+    }
 
-    public void contactStarted(FContact c){}
+    public void commandArmyHeading(float x, float y) {
+    }
 
-    public void updateArmyToZoom(){
-     army.absolutPosition.mult(GameConstants.zoomFactor);
-        for(Soldier s: army.soldiers){
+    public void updateArmySoldiers() {
+    }
+
+    public void updateState() {
+        for (Soldier s : army.soldiers)
+            s.updatePosition();
+    }
+
+    public boolean isMarching() {
+        return false;
+    }
+
+    public void contactStarted(FContact c) {
+    }
+
+    public void updateArmyToZoom() {
+        army.absolutPosition.mult(GameConstants.zoomFactor);
+        for (Soldier s : army.soldiers) {
             s.updateSoldierSizeToZoom();
             s.relPosition.mult(GameConstants.zoomFactor);
-           s.setPosition(s.getX()*GameConstants.zoomFactor,s.getY()*GameConstants.zoomFactor);
-          }
-  }
+            s.setPosition(s.getX() * GameConstants.zoomFactor, s.getY() * GameConstants.zoomFactor);
+        }
+    }
 
+    @Override
+    public void updateMapPosition(float dx, float dy) {
 
+    }
 
 
 }

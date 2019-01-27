@@ -21,7 +21,6 @@ class ArmyMoverStateWar implements ArmyMoverState {
         if (PApplet.dist(msp.x, msp.y, x, y) < GameConstants.armySelectorSize /2){// armyMover.armySelectorSize / 2) {
             newSelectedArmy = armyMover;
             retreatToLocation = null;
-
         }
         return newSelectedArmy;
     }
@@ -29,7 +28,6 @@ class ArmyMoverStateWar implements ArmyMoverState {
     public void dragFromArmy(float x, float y) {
         if (retreatToLocation == null) retreatToLocation = new PVector();
         retreatToLocation.set(x, y);
-
     }
 
     public void secondSelection(float x, float y) {
@@ -46,15 +44,9 @@ class ArmyMoverStateWar implements ArmyMoverState {
     }
 
     public void display(boolean selected) {
-        if (selected)
-            FisicaArmy3.fiscaArmy3.stroke(armyMover.soldierMover.r, armyMover.soldierMover.g, armyMover.soldierMover.b, 300);
-        else
-            FisicaArmy3.fiscaArmy3.stroke(armyMover.soldierMover.r, armyMover.soldierMover.g, armyMover.soldierMover.b, 100);
         FisicaArmy3.fiscaArmy3.noFill();
-
         if (retreatToLocation != null)
             FisicaArmy3.fiscaArmy3.ellipse(retreatToLocation.x, retreatToLocation.y, 30, 30);
-
     }
 
 

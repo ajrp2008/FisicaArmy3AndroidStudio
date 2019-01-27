@@ -100,7 +100,7 @@ public class FisicaArmy3 extends PApplet {
     }
 
     public void mouseDragged() {
-        if (zoomInButton.isPressed || zoomOutButton.isPressed || resetButton.isPressed) {
+        if (zoomInButton.isPressed() || zoomOutButton.isPressed() || resetButton.isPressed()) {
             return;
         }
 
@@ -136,7 +136,7 @@ public class FisicaArmy3 extends PApplet {
             //s2.army.armyMover.contactStarted(c);
         }
     }
-
+/*
     public void createSoldiers(SoldiersMover army) {
         for (int i = 0; i < army.armySize; i++) {
             Soldier s = new Soldier(army, new PVector());
@@ -144,8 +144,8 @@ public class FisicaArmy3 extends PApplet {
             army.soldiers.add(s);
         }
     }
-
-    public void initSquareFormation(SoldiersMover army) {
+*/
+   /* public void initSquareFormation(SoldiersMover army) {
         for (int i = 0; i < army.soldiers.size(); i++) {
             float length = sqrt(army.soldiers.size());
             int column = i % (int) length;
@@ -153,7 +153,7 @@ public class FisicaArmy3 extends PApplet {
             Soldier s = army.soldiers.get(i);
             s.relPosition.set((column - (length - 1.0f) / 2.0f) * GameConstants.armyGapSizeStart * GameConstants.zoomFactor, (row - (length - 1) / 2) * GameConstants.armyGapSizeStart * GameConstants.zoomFactor);
         }
-    }
+    }*/
 
     public void settings() {
        // size(1440, 2960);

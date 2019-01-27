@@ -2,15 +2,14 @@ package processing.test.fisicaarmy3;
 
 import java.util.ArrayList;
 
-import fisica.FCircle;
 import fisica.FContact;
 import processing.core.PVector;
 
 class SoldiersMover {
 
-    private ArmyMover armyMover;
-
     private String name;
+
+    private ArmyMover armyMover;
 
     private SoldiersMoveState armyState;
     private SoldiersMoverStateMarch armyMarch = new SoldiersMoverStateMarch(this);
@@ -19,21 +18,37 @@ class SoldiersMover {
 
     ArrayList<Soldier> soldiers = new ArrayList<Soldier>();
     PVector absolutPosition = new PVector();
-    boolean isMarching = false;
-    float heading = 0;
-    int armySize = 25;
-    float r, g, b;
+    private int armySize = 25;
+    private float r, g, b;
 
     SoldiersMover(float x, float y, String name, float r, float g, float b, ArmyMover armyMover) {
+        this.armyMover = armyMover;
         armyState = armyMarch;
         absolutPosition.set(x, y);
         this.r = r;
         this.g = g;
         this.b = b;
         this.name = name;
-        FisicaArmy3.fiscaArmy3.createSoldiers(this);
-        FisicaArmy3.fiscaArmy3.initSquareFormation(this);
-        this.armyMover = armyMover;
+        createSoldiers();
+        initSquareFormation();
+    }
+
+    public void createSoldiers() {
+        for (int i = 0; i < armySize; i++) {
+            Soldier s = new Soldier(this, new PVector());
+            s.setFill(r, g, b);
+            soldiers.add(s);
+        }
+    }
+
+    public void initSquareFormation() {
+        for (int i = 0; i < soldiers.size(); i++) {
+            float length = (float) Math.sqrt(soldiers.size());
+            int column = i % (int) length;
+            int row = i / (int) length;
+            Soldier s = soldiers.get(i);
+            s.relPosition.set((column - (length - 1.0f) / 2.0f) * GameConstants.armyGapSizeStart * GameConstants.zoomFactor, (row - (length - 1) / 2) * GameConstants.armyGapSizeStart * GameConstants.zoomFactor);
+        }
     }
 
     PVector meanSoldierPosition() {
@@ -61,7 +76,7 @@ class SoldiersMover {
 
     void updateMapPosition(float dx, float dy) {
         absolutPosition.add(dx, dy);
-        armyWar.positionContact.add(dx, dy);
+        armyState.updateMapPosition(dx,dy);
         for (Soldier s : soldiers) {
             s.setPosition(s.getX() + dx, s.getY() + dy);
         }
@@ -80,8 +95,12 @@ class SoldiersMover {
         armyState.updateState();
     }
 
+    void updateArmyColors(){
+        FisicaArmy3.fiscaArmy3.stroke(r,g,b);
+    }
+
     boolean isMarching() {
-        return armyState.isMarching();
+        return !armyState.isMarching();
     }
 
     public void contactStarted(FContact c) {
@@ -93,8 +112,8 @@ class SoldiersMover {
     }
 
     void changeToRetreatState(float x, float y) {
-        this.armyWar.firstContact = null;
-        this.armyRetreat.retreatToLocation.set(x, y);
+        this.armyWar.initState();
+        this.armyRetreat.setRetreatLocation(x,y);
         this.absolutPosition.set(x, y);
         this.armyState = this.armyRetreat;
     }
@@ -108,11 +127,11 @@ class SoldiersMover {
         this.armyState      = this.armyWar;
     }
 
-    public void contactTellSuperior(FContact c) {
+    void contactTellSuperior(FContact c) {
         this.armyMover.contactStarted(c);
     }
 
-    public String getName(){
+    String getName(){
         return name;
     }
 }

@@ -86,10 +86,10 @@ class ArmyMoverStateMarch implements ArmyMoverState {
   public void update() {
     armyMover.soldierMover.updateArmy();
     if (approveRoute) {
-      if (!wayPoints.isEmpty() && !armyMover.soldierMover.isMarching() && nextPoint == null) {
+      if (!wayPoints.isEmpty() && armyMover.soldierMover.isMarching() && nextPoint == null) {
         nextPoint = wayPoints.get(0);
         armyMover.soldierMover.commandArmyHeading(nextPoint.x, nextPoint.y);
-      } else if (!wayPoints.isEmpty() && !armyMover.soldierMover.isMarching() && nextPoint != null) {
+      } else if (!wayPoints.isEmpty() && armyMover.soldierMover.isMarching() && nextPoint != null) {
         armyMover.soldierMover.commandArmyPosition(nextPoint.x, nextPoint.y);
         wayPoints.remove(nextPoint);
         nextPoint = null;
@@ -101,10 +101,6 @@ class ArmyMoverStateMarch implements ArmyMoverState {
 
   public void display(boolean selected) {
     if (!wayPoints.isEmpty()) {
-      if (selected)
-        FisicaArmy3.fiscaArmy3.stroke(armyMover.soldierMover.r, armyMover.soldierMover.g, armyMover.soldierMover.b, 300);
-      else
-        FisicaArmy3.fiscaArmy3.stroke(armyMover.soldierMover.r, armyMover.soldierMover.g, armyMover.soldierMover.b, 100);
       FisicaArmy3.fiscaArmy3.noFill();
 
       FisicaArmy3.fiscaArmy3.beginShape();

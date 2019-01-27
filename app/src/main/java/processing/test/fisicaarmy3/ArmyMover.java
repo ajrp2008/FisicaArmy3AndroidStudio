@@ -52,6 +52,7 @@ class ArmyMover {
     }
 
     void display(boolean selected) {
+        soldierMover.updateArmyColors();
         moverState.display(selected);
     }
 
