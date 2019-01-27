@@ -2,14 +2,15 @@ package processing.test.fisicaarmy3;
 
 import java.util.ArrayList;
 
+import fisica.FCircle;
 import fisica.FContact;
 import processing.core.PVector;
 
 class SoldiersMover {
 
-    ArmyMover armyMover;
+    private ArmyMover armyMover;
 
-    String name;
+    private String name;
 
     private SoldiersMoveState armyState;
     private SoldiersMoverStateMarch armyMarch = new SoldiersMoverStateMarch(this);
@@ -23,7 +24,7 @@ class SoldiersMover {
     int armySize = 25;
     float r, g, b;
 
-    SoldiersMover(float x, float y, String name, float r, float g, float b) {
+    SoldiersMover(float x, float y, String name, float r, float g, float b, ArmyMover armyMover) {
         armyState = armyMarch;
         absolutPosition.set(x, y);
         this.r = r;
@@ -32,6 +33,7 @@ class SoldiersMover {
         this.name = name;
         FisicaArmy3.fiscaArmy3.createSoldiers(this);
         FisicaArmy3.fiscaArmy3.initSquareFormation(this);
+        this.armyMover = armyMover;
     }
 
     PVector meanSoldierPosition() {
@@ -106,4 +108,11 @@ class SoldiersMover {
         this.armyState      = this.armyWar;
     }
 
+    public void contactTellSuperior(FContact c) {
+        this.armyMover.contactStarted(c);
+    }
+
+    public String getName(){
+        return name;
+    }
 }

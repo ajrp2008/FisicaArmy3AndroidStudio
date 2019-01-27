@@ -1,13 +1,14 @@
 package processing.test.fisicaarmy3;
 
 import fisica.FCircle;
+import fisica.FContact;
 import processing.core.PApplet;
 import processing.core.PVector;
 
 class Soldier extends FCircle {
 
   PVector relPosition    =  new PVector();
-  SoldiersMover army;
+  private SoldiersMover army;
 
   boolean  isAlive        = true;
 
@@ -20,7 +21,7 @@ class Soldier extends FCircle {
     setPosition(army.absolutPosition.x + relPos.x, army.absolutPosition.y + relPos.y);
     setGrabbable(false);
     setDamping(0.25f);
-    setName(army.name);
+    setName(army.getName());
     FisicaArmy3.fiscaArmy3.world.add(this);
   }
 
@@ -70,4 +71,9 @@ class Soldier extends FCircle {
      // opponent.army.soldiers.remove(opponent);
     }
   }
+
+  void contactTellSuperior(FContact c){
+    this.army.contactTellSuperior(c);
+  }
+
 }

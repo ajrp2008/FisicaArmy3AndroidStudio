@@ -4,9 +4,6 @@ import fisica.FContact;
 
 class ArmyMover {
 
-    float armySelectorSize = GameConstants.armySelectorSizeStart;
-
-
     private ArmyMoverStateMarch moverStateFollowPath = new ArmyMoverStateMarch(this);
     private ArmyMoverStateWar moverStateWar = new ArmyMoverStateWar(this);
     private ArmyMoverStateRetreat moverStateRetreat = new ArmyMoverStateRetreat(this);
@@ -15,9 +12,18 @@ class ArmyMover {
 
     SoldiersMover soldierMover;
 
-    ArmyMover(SoldiersMover army) {
-        this.soldierMover = army;
-        this.soldierMover.armyMover = this;
+    private ArmyMover(){}
+
+    static ArmyMover createArmy(float x, float y, String name, float r, float g, float b){
+        ArmyMover       armyMover       = new ArmyMover();
+        SoldiersMover   soldiersMover   = new SoldiersMover(x,y,name,r,g,b,armyMover);
+        armyMover.setSoldierMover(soldiersMover);
+
+       return armyMover;
+    }
+
+    private void setSoldierMover(SoldiersMover soldierMover){
+        this.soldierMover = soldierMover;
     }
 
     ArmyMover firstSelectionArmy(float x, float y) {
@@ -33,6 +39,7 @@ class ArmyMover {
     }
 
     void updateWithZoomFactor() {
+        soldierMover.updateArmyToZoom();
         moverState.updateWithZoomFactor();
     }
 
@@ -65,11 +72,8 @@ class ArmyMover {
 
     void changeToMarchState(){
         soldierMover.changeToMarchState();
-        moverStateFollowPath.wayPoints.clear();
-        moverStateFollowPath.approveRoute = false;
-        moverStateFollowPath.nextPoint = null;
+        moverStateFollowPath.initState();
         moverState = moverStateFollowPath;
-
     }
 
 }

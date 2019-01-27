@@ -38,12 +38,12 @@ public class FisicaArmy3 extends PApplet {
         ellipseMode(CENTER);
         GameConstants.initGameConstants();
         armySelector = new ArmySelector();
-        armySelector.addArmy(new ArmyMover(new SoldiersMover(100, 100, "A", 0, 255, 0)));
-        armySelector.addArmy(new ArmyMover(new SoldiersMover(200, 150, "B", 255, 255, 255)));
-        armySelector.addArmy(new ArmyMover(new SoldiersMover(100, 200, "C", 200, 0, 0)));
-        armySelector.addArmy(new ArmyMover(new SoldiersMover(400, 100, "D", 0, 255, 0)));
-        armySelector.addArmy(new ArmyMover(new SoldiersMover(600, 150, "E", 255, 255, 255)));
-        armySelector.addArmy(new ArmyMover(new SoldiersMover(400, 200, "F", 200, 0, 0)));
+        armySelector.addArmy(ArmyMover.createArmy(100, 100, "A", 0, 255, 0));
+        armySelector.addArmy(ArmyMover.createArmy(200, 150, "B", 255, 255, 255));
+        armySelector.addArmy(ArmyMover.createArmy(100, 200, "C", 200, 0, 0));
+        armySelector.addArmy(ArmyMover.createArmy(400, 100, "D", 0, 255, 0));
+        armySelector.addArmy(ArmyMover.createArmy(600, 150, "E", 255, 255, 255));
+        armySelector.addArmy(ArmyMover.createArmy(400, 200, "F", 200, 0, 0));
         //Initial zoom based on screen size
         zoomMap(4);
 
@@ -130,8 +130,10 @@ public class FisicaArmy3 extends PApplet {
         if (!c.getBody1().getName().equals(c.getBody2().getName())) {
             Soldier s1 = (Soldier) c.getBody1();
             Soldier s2 = (Soldier) c.getBody2();
-            s1.army.armyMover.contactStarted(c);
-            s2.army.armyMover.contactStarted(c);
+            s1.contactTellSuperior(c);
+            s2.contactTellSuperior(c);
+            //s1.army.armyMover.contactStarted(c);
+            //s2.army.armyMover.contactStarted(c);
         }
     }
 

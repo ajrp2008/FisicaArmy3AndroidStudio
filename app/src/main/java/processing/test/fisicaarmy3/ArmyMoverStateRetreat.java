@@ -27,7 +27,7 @@ class ArmyMoverStateRetreat implements ArmyMoverState {
     public void update() {
         armyMover.soldierMover.updateArmy();
         PVector msp = armyMover.soldierMover.meanSoldierPosition();
-        if (PApplet.dist(retreatToLocation.x, retreatToLocation.y, msp.x, msp.y) < armyMover.armySelectorSize / 2) {
+        if (PApplet.dist(retreatToLocation.x, retreatToLocation.y, msp.x, msp.y) < GameConstants.armySelectorSize /2){// armyMover.armySelectorSize / 2) {
             this.armyMover.changeToMarchState();
         }
     }
@@ -38,8 +38,8 @@ class ArmyMoverStateRetreat implements ArmyMoverState {
     }
 
     public void updateWithZoomFactor() {
-        armyMover.armySelectorSize *= GameConstants.zoomFactor;
-        armyMover.soldierMover.updateArmyToZoom();
+       // armyMover.armySelectorSize *= GameConstants.zoomFactor;
+       // armyMover.soldierMover.updateArmyToZoom();
         retreatToLocation.mult(GameConstants.zoomFactor);
     }
 

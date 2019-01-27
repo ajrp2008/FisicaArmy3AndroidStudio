@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import processing.core.PVector;
 
 class ArmySelector {
-    private float armySelectorSize = GameConstants.armySelectorSizeStart;
     private ArmyMover selectedArmy = null;
     private ArrayList<ArmyMover> armyList = new ArrayList<ArmyMover>();
 
@@ -38,7 +37,9 @@ class ArmySelector {
     }
 
     void updateWithZoomFactor() {
-        armySelectorSize *= GameConstants.zoomFactor;
+        GameConstants.armySelectorSize *=GameConstants.zoomFactor;
+        GameConstants.wayPointGap *= GameConstants.zoomFactor;
+
         for (ArmyMover ap : this.armyList) {
             ap.updateWithZoomFactor();
         }
@@ -66,7 +67,7 @@ class ArmySelector {
             FisicaArmy3.fiscaArmy3.noStroke();
             if (a == selectedArmy) FisicaArmy3.fiscaArmy3.fill(255, 255, 0, 100);
             else FisicaArmy3.fiscaArmy3.fill(30, 0, 0, 100);
-            FisicaArmy3.fiscaArmy3.ellipse(msp.x, msp.y, armySelectorSize, armySelectorSize);
+            FisicaArmy3.fiscaArmy3.ellipse(msp.x, msp.y, GameConstants.armySelectorSize, GameConstants.armySelectorSize);
             FisicaArmy3.fiscaArmy3.stroke(255, 0, 0);
      /* if(a == selectedArmy){
           FisicaArmy3.fiscaArmy3.textSize(30); continue; }else FisicaArmy3.fiscaArmy3.textSize(15);

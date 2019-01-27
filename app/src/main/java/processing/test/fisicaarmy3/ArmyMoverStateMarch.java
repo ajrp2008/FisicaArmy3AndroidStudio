@@ -8,29 +8,30 @@ import processing.core.PVector;
 
 class ArmyMoverStateMarch implements ArmyMoverState {
 
-  boolean approveRoute = false;
 
   private ArmyMover armyMover;
 
-
-  private float wayPointsGap = GameConstants.wayPointGapStart;
-
-  ArrayList<PVector> wayPoints = new ArrayList<PVector>();
-  PVector nextPoint;
+  private boolean approveRoute = false;
+  private ArrayList<PVector> wayPoints = new ArrayList<PVector>();
+  private PVector nextPoint;
 
 
   ArmyMoverStateMarch(ArmyMover armyMover) {
     this.armyMover = armyMover;
   }
 
+  void initState(){
+    wayPoints.clear();
+    approveRoute = false;
+    nextPoint = null;
+  }
+
   public ArmyMover firstSelectionArmy(float x, float y) {
     ArmyMover newSelectedArmy = null;
-
     PVector msp = armyMover.soldierMover.meanSoldierPosition();
 
-
     //FIRST SELECTION: SELECT THIS ARMY
-    if (PApplet.dist(msp.x, msp.y, x, y) < armyMover.armySelectorSize / 2) {
+    if (PApplet.dist(msp.x, msp.y, x, y) < GameConstants.armySelectorSize /2){
       newSelectedArmy = armyMover;
     }
 
@@ -38,26 +39,23 @@ class ArmyMoverStateMarch implements ArmyMoverState {
     if (!wayPoints.isEmpty()) {
       PVector wp = wayPoints.get(wayPoints.size() - 1);
       float distFromLastWayPoint = PApplet.dist(wp.x, wp.y, x, y);
-
-      if (distFromLastWayPoint < armyMover.armySelectorSize / 2) {
+      if (distFromLastWayPoint <GameConstants.armySelectorSize /2){
         newSelectedArmy = armyMover;
       }
     }
-
     return newSelectedArmy;
   }
 
   public void dragFromArmy(float x, float y) {
-
-
     //DRAG : ONLY WHEN NOT ARMY SELECTED AND NOT ROUTE APPROVED
     PVector msp = armyMover.soldierMover.meanSoldierPosition();
-    if (approveRoute || PApplet.dist(msp.x, msp.y, x, y) < armyMover.armySelectorSize / 2) return;
+    if (approveRoute || PApplet.dist(msp.x, msp.y, x, y) < GameConstants.armySelectorSize /2)return;//armyMover.armySelectorSize / 2) return;
 
     //DRAG : NEW WAYPOINT WHEN DISTANCE MORE THAN GAP!
     PVector lastPoint = wayPoints.isEmpty() ? armyMover.soldierMover.absolutPosition : wayPoints.get(wayPoints.size() - 1);
     float distance = PApplet.dist(lastPoint.x, lastPoint.y, x, y);
-    if (distance > wayPointsGap)
+    //if (distance > wayPointsGap)
+      if(distance > GameConstants.wayPointGap)
       wayPoints.add(new PVector(x, y));
   }
 
@@ -66,19 +64,18 @@ class ArmyMoverStateMarch implements ArmyMoverState {
     //SECOND SELECTION: ONLY WHEN WAYPOINTS EXISTS
     if (wayPoints.isEmpty()) return;
 
-
     //SECOND SELECTION: Select last wayPoint - approve !!
     PVector wp = wayPoints.get(wayPoints.size() - 1);
     float distFromLastWayPoint = PApplet.dist(wp.x, wp.y, x, y);
 
-    if (distFromLastWayPoint < armyMover.armySelectorSize / 2) {
+    if (distFromLastWayPoint <GameConstants.armySelectorSize /2){// armyMover.armySelectorSize / 2) {
       approveRoute = true;
     }
 
     //SECOND SELECTION:  Select army again and route exists -> delete route!
     PVector msp = armyMover.soldierMover.meanSoldierPosition();
 
-    if (PApplet.dist(msp.x, msp.y, x, y) < armyMover.armySelectorSize / 2 && !wayPoints.isEmpty()) {
+    if (PApplet.dist(msp.x, msp.y, x, y) < GameConstants.armySelectorSize /2 / 2 && !wayPoints.isEmpty()) {
       wayPoints.clear();
       nextPoint = null;
       approveRoute = false;
@@ -87,9 +84,7 @@ class ArmyMoverStateMarch implements ArmyMoverState {
 
 
   public void update() {
-
     armyMover.soldierMover.updateArmy();
-
     if (approveRoute) {
       if (!wayPoints.isEmpty() && !armyMover.soldierMover.isMarching() && nextPoint == null) {
         nextPoint = wayPoints.get(0);
@@ -128,7 +123,7 @@ class ArmyMoverStateMarch implements ArmyMoverState {
           FisicaArmy3.fiscaArmy3.ellipse(p.x, p.y, 3, 3);
 
           if (wayPoints.indexOf(p) >= (wayPoints.size() - 1)) {
-            FisicaArmy3.fiscaArmy3.ellipse(p.x, p.y, armyMover.armySelectorSize, armyMover.armySelectorSize);
+            FisicaArmy3.fiscaArmy3.ellipse(p.x, p.y, GameConstants.armySelectorSize, GameConstants.armySelectorSize);
           }
         }
       }
@@ -136,9 +131,6 @@ class ArmyMoverStateMarch implements ArmyMoverState {
   }
 
   public void updateWithZoomFactor() {
-    armyMover.armySelectorSize *= GameConstants.zoomFactor;
-    wayPointsGap *= GameConstants.zoomFactor;
-    armyMover.soldierMover.updateArmyToZoom();
     for (PVector wp : wayPoints) {
       wp.mult(GameConstants.zoomFactor);
     }

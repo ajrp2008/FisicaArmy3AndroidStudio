@@ -18,7 +18,7 @@ class ArmyMoverStateWar implements ArmyMoverState {
         ArmyMover newSelectedArmy = null;
         PVector msp = armyMover.soldierMover.meanSoldierPosition();
         //FIRST SELECTION: SELECT THIS ARMY
-        if (PApplet.dist(msp.x, msp.y, x, y) < armyMover.armySelectorSize / 2) {
+        if (PApplet.dist(msp.x, msp.y, x, y) < GameConstants.armySelectorSize /2){// armyMover.armySelectorSize / 2) {
             newSelectedArmy = armyMover;
             retreatToLocation = null;
 
@@ -34,7 +34,7 @@ class ArmyMoverStateWar implements ArmyMoverState {
 
     public void secondSelection(float x, float y) {
         if (retreatToLocation != null) {
-            if (PApplet.dist(retreatToLocation.x, retreatToLocation.y, x, y) < armyMover.armySelectorSize / 2) {
+            if (PApplet.dist(retreatToLocation.x, retreatToLocation.y, x, y) < GameConstants.armySelectorSize /2){// armyMover.armySelectorSize / 2) {
                 this.retreatToLocation = null;
                 this.armyMover.changeToRetreatState(x, y);
             }
@@ -59,8 +59,8 @@ class ArmyMoverStateWar implements ArmyMoverState {
 
 
     public void updateWithZoomFactor() {
-        armyMover.armySelectorSize *= GameConstants.zoomFactor;
-        armyMover.soldierMover.updateArmyToZoom();
+        //armyMover.armySelectorSize *= GameConstants.zoomFactor;
+        //armyMover.soldierMover.updateArmyToZoom();
         if (retreatToLocation != null)
             retreatToLocation.mult(GameConstants.zoomFactor);
 
