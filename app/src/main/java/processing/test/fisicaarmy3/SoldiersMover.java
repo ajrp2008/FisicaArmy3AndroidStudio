@@ -95,8 +95,12 @@ class SoldiersMover {
         armyState.updateState();
     }
 
-    void updateArmyColors(){
-        FisicaArmy3.fiscaArmy3.stroke(r,g,b);
+    void updateArmyColors(boolean selected){
+        if(selected)
+            FisicaArmy3.fiscaArmy3.stroke(r,g,b,255);
+        else
+            FisicaArmy3.fiscaArmy3.stroke(r,g,b,100);
+
     }
 
     boolean isMarching() {
