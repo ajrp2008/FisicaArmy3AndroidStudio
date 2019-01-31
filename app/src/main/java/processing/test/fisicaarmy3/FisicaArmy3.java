@@ -41,9 +41,9 @@ public class FisicaArmy3 extends PApplet {
         armySelector.addArmy(ArmyMover.createArmy(100, 100, "A", 0, 255, 0));
         armySelector.addArmy(ArmyMover.createArmy(200, 150, "B", 255, 255, 255));
         armySelector.addArmy(ArmyMover.createArmy(100, 200, "C", 200, 0, 0));
-        armySelector.addArmy(ArmyMover.createArmy(400, 100, "D", 0, 255, 0));
-        armySelector.addArmy(ArmyMover.createArmy(600, 150, "E", 255, 255, 255));
-        armySelector.addArmy(ArmyMover.createArmy(400, 200, "F", 200, 0, 0));
+        armySelector.addArmy(ArmyMover.createArmy(400, 100, "A", 0, 255, 0));
+        armySelector.addArmy(ArmyMover.createArmy(600, 150, "B", 255, 255, 255));
+        armySelector.addArmy(ArmyMover.createArmy(400, 200, "C", 200, 0, 0));
         //Initial zoom based on screen size
         zoomMap(4);
 

@@ -53,7 +53,7 @@ class Soldier extends FCircle {
 
   public boolean isMarching() {
     float e = PApplet.dist(getX(), getY(), army.absolutPosition.x+relPosition.x, army.absolutPosition.y+relPosition.y);
-    if (e > 3) {
+    if (e > 8) {
       PApplet.println(FisicaArmy3.fiscaArmy3.frameCount+"I MARCH"+this.getVelocityX());
       return true;
     } else {

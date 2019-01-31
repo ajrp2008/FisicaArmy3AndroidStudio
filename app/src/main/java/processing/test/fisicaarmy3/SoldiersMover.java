@@ -107,7 +107,7 @@ class SoldiersMover {
         armyState.contactStarted(c);
     }
 
-    boolean isStateWar(){
+    boolean isNotStateWar(){
         return (this.armyState != this.armyWar);
     }
 
@@ -133,5 +133,9 @@ class SoldiersMover {
 
     String getName(){
         return name;
+    }
+
+    String getStateName(){
+        return armyState.toString();
     }
 }

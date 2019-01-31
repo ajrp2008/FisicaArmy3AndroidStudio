@@ -63,7 +63,7 @@ class ArmySelector {
             // if(a==selectedArmy)continue;
             a.display(a == selectedArmy);
             //CENTER OF ARMY///////////////////////////
-            PVector msp = a.soldierMover.meanSoldierPosition();
+            PVector msp = a.getArmyCenter();
             FisicaArmy3.fiscaArmy3.noStroke();
             if (a == selectedArmy) FisicaArmy3.fiscaArmy3.fill(255, 255, 0, 100);
             else FisicaArmy3.fiscaArmy3.fill(30, 0, 0, 100);

@@ -28,10 +28,11 @@ class ArmyMoverStateMarch implements ArmyMoverState {
 
   public ArmyMover firstSelectionArmy(float x, float y) {
     ArmyMover newSelectedArmy = null;
-    PVector msp = armyMover.soldierMover.meanSoldierPosition();
+    //PVector msp = armyMover.soldierMover.meanSoldierPosition();
 
     //FIRST SELECTION: SELECT THIS ARMY
-    if (PApplet.dist(msp.x, msp.y, x, y) < GameConstants.armySelectorSize /2){
+    //if (PApplet.dist(msp.x, msp.y, x, y) < GameConstants.armySelectorSize /2){
+    if(armyMover.isInsideArmyArea(x,y)){
       newSelectedArmy = armyMover;
     }
 
@@ -48,13 +49,13 @@ class ArmyMoverStateMarch implements ArmyMoverState {
 
   public void dragFromArmy(float x, float y) {
     //DRAG : ONLY WHEN NOT ARMY SELECTED AND NOT ROUTE APPROVED
-    PVector msp = armyMover.soldierMover.meanSoldierPosition();
-    if (approveRoute || PApplet.dist(msp.x, msp.y, x, y) < GameConstants.armySelectorSize /2)return;//armyMover.armySelectorSize / 2) return;
+    if(approveRoute || armyMover.isInsideArmyArea(x,y))return;
+   // PVector msp = armyMover.soldierMover.meanSoldierPosition();
+    //if (approveRoute || PApplet.dist(msp.x, msp.y, x, y) < GameConstants.armySelectorSize /2)return;//armyMover.armySelectorSize / 2) return;
 
     //DRAG : NEW WAYPOINT WHEN DISTANCE MORE THAN GAP!
-    PVector lastPoint = wayPoints.isEmpty() ? armyMover.soldierMover.absolutPosition : wayPoints.get(wayPoints.size() - 1);
+    PVector lastPoint = wayPoints.isEmpty() ? armyMover.getArmyCenter() : wayPoints.get(wayPoints.size() - 1);
     float distance = PApplet.dist(lastPoint.x, lastPoint.y, x, y);
-    //if (distance > wayPointsGap)
       if(distance > GameConstants.wayPointGap)
       wayPoints.add(new PVector(x, y));
   }
@@ -73,10 +74,10 @@ class ArmyMoverStateMarch implements ArmyMoverState {
     }
 
     //SECOND SELECTION:  Select army again and route exists -> delete route!
-    PVector msp = armyMover.soldierMover.meanSoldierPosition();
-
-    if (PApplet.dist(msp.x, msp.y, x, y) < GameConstants.armySelectorSize /2 / 2 && !wayPoints.isEmpty()) {
-      wayPoints.clear();
+    //PVector msp = armyMover.soldierMover.meanSoldierPosition();
+   // if (PApplet.dist(msp.x, msp.y, x, y) < GameConstants.armySelectorSize /2 / 2 && !wayPoints.isEmpty()) {
+      if (armyMover.isInsideArmyArea(x,y) && !wayPoints.isEmpty()) {
+        wayPoints.clear();
       nextPoint = null;
       approveRoute = false;
     }
@@ -84,13 +85,12 @@ class ArmyMoverStateMarch implements ArmyMoverState {
 
 
   public void update() {
-    armyMover.soldierMover.updateArmy();
     if (approveRoute) {
-      if (!wayPoints.isEmpty() && armyMover.soldierMover.isMarching() && nextPoint == null) {
+      if (!wayPoints.isEmpty() && armyMover.isMarching() && nextPoint == null) {
         nextPoint = wayPoints.get(0);
-        armyMover.soldierMover.commandArmyHeading(nextPoint.x, nextPoint.y);
-      } else if (!wayPoints.isEmpty() && armyMover.soldierMover.isMarching() && nextPoint != null) {
-        armyMover.soldierMover.commandArmyPosition(nextPoint.x, nextPoint.y);
+        armyMover.commandArmyHeading(nextPoint.x, nextPoint.y);
+      } else if (!wayPoints.isEmpty() && armyMover.isMarching() && nextPoint != null) {
+        armyMover.commandArmyPosition(nextPoint.x, nextPoint.y);
         wayPoints.remove(nextPoint);
         nextPoint = null;
       } else if (wayPoints.isEmpty()) {
@@ -104,18 +104,18 @@ class ArmyMoverStateMarch implements ArmyMoverState {
       FisicaArmy3.fiscaArmy3.noFill();
 
       FisicaArmy3.fiscaArmy3.beginShape();
-      PVector msp = armyMover.soldierMover.meanSoldierPosition();
+      PVector msp = armyMover.getArmyCenter();
       FisicaArmy3.fiscaArmy3.vertex(msp.x, msp.y);
-      FisicaArmy3.fiscaArmy3.vertex(armyMover.soldierMover.absolutPosition.x, armyMover.soldierMover.absolutPosition.y);
+      //FisicaArmy3.fiscaArmy3.vertex(armyMover.soldierMover.absolutPosition.x, armyMover.soldierMover.absolutPosition.y);
       for (PVector p : wayPoints) {
-        if (armyMover.soldierMover.isStateWar()) {
+        if (armyMover.isNotStateWar()) {
           FisicaArmy3.fiscaArmy3.vertex(p.x, p.y);
         }
       }
       FisicaArmy3.fiscaArmy3.endShape();
-      FisicaArmy3.fiscaArmy3.ellipse(armyMover.soldierMover.absolutPosition.x, armyMover.soldierMover.absolutPosition.y, 3, 3);
+      //FisicaArmy3.fiscaArmy3.ellipse(armyMover.soldierMover.absolutPosition.x, armyMover.soldierMover.absolutPosition.y, 3, 3);
       for (PVector p : wayPoints) {
-        if (armyMover.soldierMover.isStateWar()) {
+        if (armyMover.isNotStateWar()) {
           FisicaArmy3.fiscaArmy3.ellipse(p.x, p.y, 3, 3);
 
           if (wayPoints.indexOf(p) >= (wayPoints.size() - 1)) {
@@ -136,7 +136,6 @@ class ArmyMoverStateMarch implements ArmyMoverState {
     for (PVector wp : wayPoints) {
       wp.add(dx, dy);
     }
-    armyMover.soldierMover.updateMapPosition(dx, dy);
   }
 
   public void contactStarted(FContact c) {

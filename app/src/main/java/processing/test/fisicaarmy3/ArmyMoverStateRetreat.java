@@ -1,7 +1,6 @@
 package processing.test.fisicaarmy3;
 
 import fisica.FContact;
-import processing.core.PApplet;
 import processing.core.PVector;
 
 class ArmyMoverStateRetreat implements ArmyMoverState {
@@ -25,9 +24,7 @@ class ArmyMoverStateRetreat implements ArmyMoverState {
     }
 
     public void update() {
-        armyMover.soldierMover.updateArmy();
-        PVector msp = armyMover.soldierMover.meanSoldierPosition();
-        if (PApplet.dist(retreatToLocation.x, retreatToLocation.y, msp.x, msp.y) < GameConstants.armySelectorSize /2){// armyMover.armySelectorSize / 2) {
+        if(armyMover.isInsideArmyArea(retreatToLocation.x, retreatToLocation.y)){
             this.armyMover.changeToMarchState();
         }
     }
@@ -38,13 +35,10 @@ class ArmyMoverStateRetreat implements ArmyMoverState {
     }
 
     public void updateWithZoomFactor() {
-       // armyMover.armySelectorSize *= GameConstants.zoomFactor;
-       // armyMover.soldierMover.updateArmyToZoom();
         retreatToLocation.mult(GameConstants.zoomFactor);
     }
 
     public void updateMapPosition(float dx, float dy) {
-        armyMover.soldierMover.updateMapPosition(dx, dy);
         retreatToLocation.add(dx, dy);
     }
 

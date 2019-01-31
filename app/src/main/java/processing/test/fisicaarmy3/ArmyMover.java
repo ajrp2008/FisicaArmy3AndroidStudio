@@ -1,6 +1,7 @@
 package processing.test.fisicaarmy3;
 
 import fisica.FContact;
+import processing.core.PVector;
 
 class ArmyMover {
 
@@ -10,7 +11,7 @@ class ArmyMover {
 
     private ArmyMoverState moverState = moverStateFollowPath;
 
-    SoldiersMover soldierMover;
+    private SoldiersMover soldierMover;
 
     private ArmyMover(){}
 
@@ -36,6 +37,7 @@ class ArmyMover {
 
     void update() {
         moverState.update();
+        soldierMover.updateArmy();
     }
 
     void updateWithZoomFactor() {
@@ -45,6 +47,7 @@ class ArmyMover {
 
     void updateMapPosition(float dx, float dy) {
         moverState.updateMapPosition(dx, dy);
+        soldierMover.updateMapPosition(dx,dy);
     }
 
     void dragFromArmy(float x, float y) {
@@ -54,10 +57,15 @@ class ArmyMover {
     void display(boolean selected) {
         soldierMover.updateArmyColors();
         moverState.display(selected);
+        PVector p = getArmyCenter();
+        FisicaArmy3.fiscaArmy3.text(moverState.toString(),p.x+GameConstants.armySelectorSize/2,p.y);
+        FisicaArmy3.fiscaArmy3.text(soldierMover.getStateName(),p.x+GameConstants.armySelectorSize/2,p.y+25);
+
     }
 
     public void contactStarted(FContact c) {
         moverState.contactStarted(c);
+        soldierMover.contactStarted(c);
     }
 
     void changeToWarState(FContact c){
@@ -77,4 +85,33 @@ class ArmyMover {
         moverState = moverStateFollowPath;
     }
 
+    boolean isInsideArmyArea(float x, float y){
+        boolean result = false;
+        PVector msp = getArmyCenter();
+        if (FisicaArmy3.fiscaArmy3.dist(x, y, msp.x, msp.y) < GameConstants.armySelectorSize /2) {
+            result = true;
+        }
+        return result;
+    }
+
+    PVector getArmyCenter(){
+        return soldierMover.meanSoldierPosition();
+    }
+
+    boolean isNotStateWar(){
+        return (this.moverState != this.moverStateWar);
+    }
+
+    boolean isMarching(){
+        return soldierMover.isMarching();
+    }
+
+
+    public void commandArmyHeading(float x, float y) {
+        soldierMover.commandArmyHeading(x,y);
+    }
+
+    public void commandArmyPosition(float x, float y) {
+        soldierMover.commandArmyPosition(x,y);
+    }
 }

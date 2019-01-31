@@ -16,9 +16,8 @@ class ArmyMoverStateWar implements ArmyMoverState {
 
     public ArmyMover firstSelectionArmy(float x, float y) {
         ArmyMover newSelectedArmy = null;
-        PVector msp = armyMover.soldierMover.meanSoldierPosition();
         //FIRST SELECTION: SELECT THIS ARMY
-        if (PApplet.dist(msp.x, msp.y, x, y) < GameConstants.armySelectorSize /2){// armyMover.armySelectorSize / 2) {
+        if(armyMover.isInsideArmyArea(x,y)){
             newSelectedArmy = armyMover;
             retreatToLocation = null;
         }
@@ -40,7 +39,6 @@ class ArmyMoverStateWar implements ArmyMoverState {
     }
 
     public void update() {
-        armyMover.soldierMover.updateArmy();
     }
 
     public void display(boolean selected) {
@@ -49,23 +47,18 @@ class ArmyMoverStateWar implements ArmyMoverState {
             FisicaArmy3.fiscaArmy3.ellipse(retreatToLocation.x, retreatToLocation.y, 30, 30);
     }
 
-
     public void updateWithZoomFactor() {
-        //armyMover.armySelectorSize *= GameConstants.zoomFactor;
-        //armyMover.soldierMover.updateArmyToZoom();
         if (retreatToLocation != null)
             retreatToLocation.mult(GameConstants.zoomFactor);
 
     }
 
     public void updateMapPosition(float dx, float dy) {
-        armyMover.soldierMover.updateMapPosition(dx, dy);
         if (retreatToLocation != null)
             retreatToLocation.add(dx, dy);
-
     }
 
     public void contactStarted(FContact c) {
-        this.armyMover.soldierMover.contactStarted(c);
+       // this.armyMover.soldierMover.contactStarted(c);
     }
 }
