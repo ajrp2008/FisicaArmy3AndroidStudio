@@ -55,7 +55,7 @@ class ArmyMover {
     }
 
     void display(boolean selected) {
-        soldierMover.updateArmyColors();
+        soldierMover.updateArmyColors(selected);
         moverState.display(selected);
         PVector p = getArmyCenter();
         FisicaArmy3.fiscaArmy3.text(moverState.toString(),p.x+GameConstants.armySelectorSize/2,p.y);
