@@ -1,10 +1,12 @@
-package processing.test.fisicaarmy3;
+package processing.test.fisicaarmy3.army;
 
 import java.util.ArrayList;
 
 import fisica.FContact;
 import processing.core.PApplet;
 import processing.core.PVector;
+import processing.test.fisicaarmy3.FisicaArmy3;
+import processing.test.fisicaarmy3.utils.GameConstants;
 
 class ArmyMoverStateMarch implements ArmyMoverState {
 
@@ -40,7 +42,7 @@ class ArmyMoverStateMarch implements ArmyMoverState {
     if (!wayPoints.isEmpty()) {
       PVector wp = wayPoints.get(wayPoints.size() - 1);
       float distFromLastWayPoint = PApplet.dist(wp.x, wp.y, x, y);
-      if (distFromLastWayPoint <GameConstants.armySelectorSize /2){
+      if (distFromLastWayPoint < GameConstants.armySelectorSize /2){
         newSelectedArmy = armyMover;
       }
     }

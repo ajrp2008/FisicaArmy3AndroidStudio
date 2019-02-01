@@ -1,9 +1,11 @@
-package processing.test.fisicaarmy3;
+package processing.test.fisicaarmy3.army;
 
 import java.util.ArrayList;
 
 import fisica.FContact;
 import processing.core.PVector;
+import processing.test.fisicaarmy3.FisicaArmy3;
+import processing.test.fisicaarmy3.utils.GameConstants;
 
 class SoldiersMover {
 

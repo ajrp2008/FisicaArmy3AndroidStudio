@@ -1,6 +1,8 @@
-package processing.test.fisicaarmy3;
+package processing.test.fisicaarmy3.gui;
 
-class Button {
+import processing.test.fisicaarmy3.FisicaArmy3;
+
+public class Button {
 
   private FisicaArmy3 fisicaArmy3;
   private boolean isPressed = false;
@@ -38,11 +40,11 @@ class Button {
     g=0;
   }
 
-  boolean isPressed() {
+  public boolean isPressed() {
     return isPressed;
   }
 
-  private void setPressed(boolean pressed) {
+  public void setPressed(boolean pressed) {
     isPressed = pressed;
   }
 }

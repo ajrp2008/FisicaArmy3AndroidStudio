@@ -1,11 +1,13 @@
-package processing.test.fisicaarmy3;
+package processing.test.fisicaarmy3.army;
 
 import fisica.FCircle;
 import fisica.FContact;
 import processing.core.PApplet;
 import processing.core.PVector;
+import processing.test.fisicaarmy3.FisicaArmy3;
+import processing.test.fisicaarmy3.utils.GameConstants;
 
-class Soldier extends FCircle {
+public class Soldier extends FCircle {
 
   PVector relPosition    =  new PVector();
   private SoldiersMover army;
@@ -72,7 +74,7 @@ class Soldier extends FCircle {
     }
   }
 
-  void contactTellSuperior(FContact c){
+  public void contactTellSuperior(FContact c){
     this.army.contactTellSuperior(c);
   }
 

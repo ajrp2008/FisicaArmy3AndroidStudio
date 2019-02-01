@@ -3,12 +3,18 @@ package processing.test.fisicaarmy3;
 import processing.core.*;
 
 import fisica.*;
+import processing.test.fisicaarmy3.army.ArmyMover;
+import processing.test.fisicaarmy3.army.ArmySelector;
+import processing.test.fisicaarmy3.army.Soldier;
+import processing.test.fisicaarmy3.gui.Button;
+import processing.test.fisicaarmy3.utils.GameConstants;
 
 public class FisicaArmy3 extends PApplet {
 
     //comment
-    static FisicaArmy3 fiscaArmy3;
-    FWorld world;
+    public static FisicaArmy3 fiscaArmy3;
+    public FWorld world;
+
     private ArmySelector armySelector;
     private Button zoomInButton;
     private Button zoomOutButton;

@@ -1,21 +1,23 @@
-package processing.test.fisicaarmy3;
+package processing.test.fisicaarmy3.army;
 
 import java.util.ArrayList;
 
 import processing.core.PVector;
+import processing.test.fisicaarmy3.FisicaArmy3;
+import processing.test.fisicaarmy3.utils.GameConstants;
 
-class ArmySelector {
+public class ArmySelector {
     private ArmyMover selectedArmy = null;
     private ArrayList<ArmyMover> armyList = new ArrayList<ArmyMover>();
 
-    ArmySelector() {
+    public ArmySelector() {
     }
 
-    void addArmy(ArmyMover a) {
+    public void addArmy(ArmyMover a) {
         armyList.add(a);
     }
 
-    boolean selectArmy(float x, float y) {
+    public boolean selectArmy(float x, float y) {
         ArmyMover newSelectedArmy = null;
 
         for (ArmyMover a : armyList) {
@@ -29,14 +31,14 @@ class ArmySelector {
         return selectedArmy != null;
     }
 
-    boolean dragFromArmy(float x, float y) {
+    public boolean dragFromArmy(float x, float y) {
         if (selectedArmy != null) {
             selectedArmy.dragFromArmy(x, y);
         }
         return selectedArmy != null;
     }
 
-    void updateWithZoomFactor() {
+    public void updateWithZoomFactor() {
         GameConstants.armySelectorSize *=GameConstants.zoomFactor;
         GameConstants.wayPointGap *= GameConstants.zoomFactor;
 
@@ -45,19 +47,19 @@ class ArmySelector {
         }
     }
 
-    void updateMapPosition(float dx, float dy) {
+    public void updateMapPosition(float dx, float dy) {
         for (ArmyMover ap : armyList) {
             ap.updateMapPosition(dx, dy);
         }
     }
 
-    void update() {
+    public void update() {
         for (ArmyMover a : armyList) {
             a.update();
         }
     }
 
-    void drawSelector() {
+    public void drawSelector() {
         for (ArmyMover a : armyList) {
 
             // if(a==selectedArmy)continue;
@@ -83,7 +85,7 @@ class ArmySelector {
 
     }
 
-    void drawSelectedArmy() {
+    public void drawSelectedArmy() {
       /*
      ArmyMover a = selectedArmy;
       if(a==null)return;

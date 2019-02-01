@@ -1,17 +1,17 @@
-package processing.test.fisicaarmy3;
+package processing.test.fisicaarmy3.utils;
 
-class GameConstants {
+public class GameConstants {
 //not changed...
-static float soldierSpeedStart;
-static float soldierSizeStart;
-static float armyGapSizeStart;
+public static float soldierSpeedStart;
+  public static float soldierSizeStart;
+  public static float armyGapSizeStart;
 //changed...
-static float wayPointGap;
-static float armySelectorSize;
+public static float wayPointGap;
+  public static float armySelectorSize;
 //
-static float zoomFactor;
-static float zoomFactorAccumulated;
-static String debugText;
+public static float zoomFactor;
+  public static float zoomFactorAccumulated;
+  public static String debugText;
 //
 
 public static void initGameConstants(){

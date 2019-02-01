@@ -1,4 +1,4 @@
-package processing.test.fisicaarmy3;
+package processing.test.fisicaarmy3.army;
 
 import fisica.FContact;
 

@@ -1,9 +1,11 @@
-package processing.test.fisicaarmy3;
+package processing.test.fisicaarmy3.army;
 
 import fisica.FContact;
 import processing.core.PVector;
+import processing.test.fisicaarmy3.FisicaArmy3;
+import processing.test.fisicaarmy3.utils.GameConstants;
 
-class ArmyMover {
+public class ArmyMover {
 
     private ArmyMoverStateMarch moverStateFollowPath = new ArmyMoverStateMarch(this);
     private ArmyMoverStateWar moverStateWar = new ArmyMoverStateWar(this);
@@ -15,7 +17,7 @@ class ArmyMover {
 
     private ArmyMover(){}
 
-    static ArmyMover createArmy(float x, float y, String name, float r, float g, float b){
+    public static ArmyMover createArmy(float x, float y, String name, float r, float g, float b){
         ArmyMover       armyMover       = new ArmyMover();
         SoldiersMover   soldiersMover   = new SoldiersMover(x,y,name,r,g,b,armyMover);
         armyMover.setSoldierMover(soldiersMover);
@@ -58,7 +60,7 @@ class ArmyMover {
         soldierMover.updateArmyColors(selected);
         moverState.display(selected);
         PVector p = getArmyCenter();
-        FisicaArmy3.fiscaArmy3.text(moverState.toString(),p.x+GameConstants.armySelectorSize/2,p.y);
+        FisicaArmy3.fiscaArmy3.text(moverState.toString(),p.x+ GameConstants.armySelectorSize/2,p.y);
         FisicaArmy3.fiscaArmy3.text(soldierMover.getStateName(),p.x+GameConstants.armySelectorSize/2,p.y+25);
 
     }
