@@ -18,7 +18,7 @@ class Soldier extends FCircle {
     super(GameConstants.soldierSizeStart);
     this.army         = army;
     this.relPosition  = relPos;
-    setPosition(army.absolutPosition.x + relPos.x, army.absolutPosition.y + relPos.y);
+    setPosition(army.getAbsolutPosition().x + relPos.x, army.getAbsolutPosition().y + relPos.y);
     setGrabbable(false);
     setDamping(0.25f);
     setName(army.getName());
@@ -32,13 +32,13 @@ class Soldier extends FCircle {
 
   public void updateSoldierWhenInFormationPositionToZoom() {
     relPosition.mult(GameConstants.zoomFactor);
-    setPosition(army.absolutPosition.x + relPosition.x, army.absolutPosition.y + relPosition.y);
+    setPosition(army.getAbsolutPosition().x + relPosition.x, army.getAbsolutPosition().y + relPosition.y);
   }
 
 
   public void updatePosition() {
     if (isMarching()) {
-      PVector p  = new PVector(-getX()+(army.absolutPosition.x + relPosition.x), -getY()+(army.absolutPosition.y + relPosition.y));
+      PVector p  = new PVector(-getX()+(army.getAbsolutPosition().x + relPosition.x), -getY()+(army.getAbsolutPosition().y + relPosition.y));
       p.normalize();
       p.mult(speed);
       setVelocity(p.x, p.y);
@@ -52,7 +52,7 @@ class Soldier extends FCircle {
   }
 
   public boolean isMarching() {
-    float e = PApplet.dist(getX(), getY(), army.absolutPosition.x+relPosition.x, army.absolutPosition.y+relPosition.y);
+    float e = PApplet.dist(getX(), getY(), army.getAbsolutPosition().x+relPosition.x, army.getAbsolutPosition().y+relPosition.y);
     if (e > 8) {
       PApplet.println(FisicaArmy3.fiscaArmy3.frameCount+"I MARCH"+this.getVelocityX());
       return true;

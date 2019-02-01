@@ -31,7 +31,7 @@ class SoldiersMoverStateWar implements SoldiersMoveState {
         frameCount++;
         //if ((frameCount%(20*(int)random(1,3))==0 || frameCount%50==0) && frameCount>colisionFrame) { //After 50 frames - move towa
         if (frameCount == 1 || (frameCount % 50 == 0 && frameCount > colisionFrame)) {
-            for (Soldier s : army.soldiers) {
+            for (Soldier s : army.getSoldiers()) {
                 float dx = -s.getX() + positionContact.x; //s.army.absolutPosition.x;
                 float dy = -s.getY() + positionContact.y;//s.army.absolutPosition.y;
                 PVector p = new PVector(dx, dy);
@@ -47,8 +47,8 @@ class SoldiersMoverStateWar implements SoldiersMoveState {
 
     public void updateArmyToZoom() {
         positionContact.mult(GameConstants.zoomFactor);
-        army.absolutPosition.mult(GameConstants.zoomFactor);
-        for (Soldier s : army.soldiers) {
+        army.getAbsolutPosition().mult(GameConstants.zoomFactor);
+        for (Soldier s : army.getSoldiers()) {
             s.updateSoldierSizeToZoom();
             s.relPosition.mult(GameConstants.zoomFactor);
             s.setPosition(s.getX() * GameConstants.zoomFactor, s.getY() * GameConstants.zoomFactor);

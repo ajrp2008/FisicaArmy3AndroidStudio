@@ -14,13 +14,13 @@ class SoldiersMoverStateMarch implements SoldiersMoveState {
     }
 
     public void commandArmyPosition(float x, float y) {
-        army.absolutPosition.set(x, y);
+        army.getAbsolutPosition().set(x, y);
     }
 
     public void commandArmyHeading(float x, float y) {
         PVector target = new PVector(x, y);
-        PVector direction = target.sub(army.absolutPosition);
-        for (Soldier s : army.soldiers) {
+        PVector direction = target.sub(army.getAbsolutPosition());
+        for (Soldier s : army.getSoldiers()) {
             s.getRelPos().rotate(direction.heading() - heading);
         }
         heading = direction.heading();
@@ -28,7 +28,7 @@ class SoldiersMoverStateMarch implements SoldiersMoveState {
 
     public void updateArmySoldiers() {
         isMarching = false;
-        for (Soldier s : army.soldiers) {
+        for (Soldier s : army.getSoldiers()) {
             s.updatePosition();
             if (s.isMarching() && s.isAlive) {
                 isMarching = true;
@@ -40,8 +40,8 @@ class SoldiersMoverStateMarch implements SoldiersMoveState {
     }
 
     public void updateArmyToZoom() {
-        army.absolutPosition.mult(GameConstants.zoomFactor);
-        for (Soldier s : army.soldiers) {
+        army.getAbsolutPosition().mult(GameConstants.zoomFactor);
+        for (Soldier s : army.getSoldiers()) {
             s.updateSoldierSizeToZoom();
             s.updateSoldierWhenInFormationPositionToZoom();
         }

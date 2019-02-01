@@ -16,15 +16,15 @@ class SoldiersMover {
     private SoldiersMoverStateWar armyWar = new SoldiersMoverStateWar(this);
     private SoldiersMoverStateRetreat armyRetreat = new SoldiersMoverStateRetreat(this);
 
-    ArrayList<Soldier> soldiers = new ArrayList<Soldier>();
-    PVector absolutPosition = new PVector();
+    private ArrayList<Soldier> soldiers = new ArrayList<Soldier>();
+    private PVector absolutPosition = new PVector();
     private int armySize = 25;
     private float r, g, b;
 
     SoldiersMover(float x, float y, String name, float r, float g, float b, ArmyMover armyMover) {
         this.armyMover = armyMover;
         armyState = armyMarch;
-        absolutPosition.set(x, y);
+        getAbsolutPosition().set(x, y);
         this.r = r;
         this.g = g;
         this.b = b;
@@ -75,7 +75,7 @@ class SoldiersMover {
     }
 
     void updateMapPosition(float dx, float dy) {
-        absolutPosition.add(dx, dy);
+        getAbsolutPosition().add(dx, dy);
         armyState.updateMapPosition(dx,dy);
         for (Soldier s : soldiers) {
             s.setPosition(s.getX() + dx, s.getY() + dy);
@@ -118,7 +118,7 @@ class SoldiersMover {
     void changeToRetreatState(float x, float y) {
         this.armyWar.initState();
         this.armyRetreat.setRetreatLocation(x,y);
-        this.absolutPosition.set(x, y);
+        this.getAbsolutPosition().set(x, y);
         this.armyState = this.armyRetreat;
     }
 
@@ -142,4 +142,13 @@ class SoldiersMover {
     String getStateName(){
         return armyState.toString();
     }
+
+    public PVector getAbsolutPosition() {
+        return absolutPosition;
+    }
+
+    public ArrayList<Soldier> getSoldiers() {
+        return soldiers;
+    }
+
 }

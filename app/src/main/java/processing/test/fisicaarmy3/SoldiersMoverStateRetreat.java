@@ -26,7 +26,7 @@ class SoldiersMoverStateRetreat implements SoldiersMoveState {
     }
 
     public void updateState() {
-        for (Soldier s : army.soldiers)
+        for (Soldier s : army.getSoldiers())
             s.updatePosition();
     }
 
@@ -38,8 +38,8 @@ class SoldiersMoverStateRetreat implements SoldiersMoveState {
     }
 
     public void updateArmyToZoom() {
-        army.absolutPosition.mult(GameConstants.zoomFactor);
-        for (Soldier s : army.soldiers) {
+        army.getAbsolutPosition().mult(GameConstants.zoomFactor);
+        for (Soldier s : army.getSoldiers()) {
             s.updateSoldierSizeToZoom();
             s.relPosition.mult(GameConstants.zoomFactor);
             s.setPosition(s.getX() * GameConstants.zoomFactor, s.getY() * GameConstants.zoomFactor);
