@@ -1,27 +1,29 @@
-package processing.test.fisicaarmy3.army;
+package processing.test.fisicaarmy3;
 
 import java.util.ArrayList;
 
 import processing.core.PVector;
 import processing.test.fisicaarmy3.FisicaArmy3;
+import processing.test.fisicaarmy3.army.ArmyMover;
+import processing.test.fisicaarmy3.army.ArmyMoverType;
 import processing.test.fisicaarmy3.utils.GameConstants;
 
 public class ArmySelector {
-    private ArmyMover selectedArmy = null;
-    private ArrayList<ArmyMover> armyList = new ArrayList<ArmyMover>();
+    private ArmyMoverType selectedArmy = null;
+    private ArrayList<ArmyMoverType> armyList = new ArrayList<ArmyMoverType>();
 
     public ArmySelector() {
     }
 
-    public void addArmy(ArmyMover a) {
+    public void addArmy(ArmyMoverType a) {
         armyList.add(a);
     }
 
     public boolean selectArmy(float x, float y) {
-        ArmyMover newSelectedArmy = null;
+        ArmyMoverType newSelectedArmy = null;
 
-        for (ArmyMover a : armyList) {
-            ArmyMover selected = a.firstSelectionArmy(x, y);
+        for (ArmyMoverType a : armyList) {
+            ArmyMoverType selected = a.firstSelectionArmy(x, y);
             if (selected != null) newSelectedArmy = selected;
         }
         if (selectedArmy != null) selectedArmy.secondSelection(x, y);
@@ -42,25 +44,25 @@ public class ArmySelector {
         GameConstants.armySelectorSize *=GameConstants.zoomFactor;
         GameConstants.wayPointGap *= GameConstants.zoomFactor;
 
-        for (ArmyMover ap : this.armyList) {
+        for (ArmyMoverType ap : this.armyList) {
             ap.updateWithZoomFactor();
         }
     }
 
     public void updateMapPosition(float dx, float dy) {
-        for (ArmyMover ap : armyList) {
+        for (ArmyMoverType ap : armyList) {
             ap.updateMapPosition(dx, dy);
         }
     }
 
     public void update() {
-        for (ArmyMover a : armyList) {
+        for (ArmyMoverType a : armyList) {
             a.update();
         }
     }
 
     public void drawSelector() {
-        for (ArmyMover a : armyList) {
+        for (ArmyMoverType a : armyList) {
 
             // if(a==selectedArmy)continue;
             a.display(a == selectedArmy);

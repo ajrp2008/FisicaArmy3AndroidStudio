@@ -72,11 +72,11 @@ MERGED from [com.android.support:support-compat:26.0.2] C:\Users\ajrp\.gradle\ca
 activity#processing.test.fisicaarmy3.MainActivity
 ADDED from C:\Users\ajrp\Documents\FisicaArmy3AndroidStudio\app\src\main\AndroidManifest.xml:5:9-10:20
 	android:screenOrientation
-		ADDED from C:\Users\ajrp\Documents\FisicaArmy3AndroidStudio\app\src\main\AndroidManifest.xml:5:48-84
+		ADDED from C:\Users\ajrp\Documents\FisicaArmy3AndroidStudio\app\src\main\AndroidManifest.xml:5:75-111
 	android:theme
-		ADDED from C:\Users\ajrp\Documents\FisicaArmy3AndroidStudio\app\src\main\AndroidManifest.xml:5:85-152
+		ADDED from C:\Users\ajrp\Documents\FisicaArmy3AndroidStudio\app\src\main\AndroidManifest.xml:5:112-179
 	android:name
-		ADDED from C:\Users\ajrp\Documents\FisicaArmy3AndroidStudio\app\src\main\AndroidManifest.xml:5:19-47
+		ADDED from C:\Users\ajrp\Documents\FisicaArmy3AndroidStudio\app\src\main\AndroidManifest.xml:5:19-74
 intent-filter#action:name:android.intent.action.MAIN+category:name:android.intent.category.LAUNCHER
 ADDED from C:\Users\ajrp\Documents\FisicaArmy3AndroidStudio\app\src\main\AndroidManifest.xml:6:13-9:29
 action#android.intent.action.MAIN

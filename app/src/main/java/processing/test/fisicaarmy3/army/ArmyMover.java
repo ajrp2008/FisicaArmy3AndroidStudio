@@ -5,7 +5,7 @@ import processing.core.PVector;
 import processing.test.fisicaarmy3.FisicaArmy3;
 import processing.test.fisicaarmy3.utils.GameConstants;
 
-public class ArmyMover {
+public class ArmyMover implements ArmyMoverType {
 
     private ArmyMoverStateMarch moverStateFollowPath = new ArmyMoverStateMarch(this);
     private ArmyMoverStateWar moverStateWar = new ArmyMoverStateWar(this);
@@ -22,49 +22,57 @@ public class ArmyMover {
         SoldiersMover   soldiersMover   = new SoldiersMover(x,y,name,r,g,b,armyMover);
         armyMover.setSoldierMover(soldiersMover);
 
-       return armyMover;
+        return armyMover;
     }
 
     private void setSoldierMover(SoldiersMover soldierMover){
         this.soldierMover = soldierMover;
     }
 
-    ArmyMover firstSelectionArmy(float x, float y) {
+    @Override
+    public ArmyMover firstSelectionArmy(float x, float y) {
         return moverState.firstSelectionArmy(x, y);
     }
 
-    void secondSelection(float x, float y) {
+    @Override
+    public void secondSelection(float x, float y) {
         moverState.secondSelection(x, y);
     }
 
-    void update() {
+    @Override
+    public void update() {
         moverState.update();
         soldierMover.updateArmy();
     }
 
-    void updateWithZoomFactor() {
+    @Override
+    public void updateWithZoomFactor() {
         soldierMover.updateArmyToZoom();
         moverState.updateWithZoomFactor();
     }
 
-    void updateMapPosition(float dx, float dy) {
+    @Override
+    public void updateMapPosition(float dx, float dy) {
         moverState.updateMapPosition(dx, dy);
         soldierMover.updateMapPosition(dx,dy);
     }
 
-    void dragFromArmy(float x, float y) {
+    @Override
+    public void dragFromArmy(float x, float y) {
         moverState.dragFromArmy(x, y);
     }
 
-    void display(boolean selected) {
+    @Override
+    public void display(boolean selected) {
         soldierMover.updateArmyColors(selected);
         moverState.display(selected);
         PVector p = getArmyCenter();
-        FisicaArmy3.fiscaArmy3.text(moverState.toString(),p.x+ GameConstants.armySelectorSize/2,p.y);
-        FisicaArmy3.fiscaArmy3.text(soldierMover.getStateName(),p.x+GameConstants.armySelectorSize/2,p.y+25);
+       // FisicaArmy3.fiscaArmy3.text(moverState.toString(),p.x+ GameConstants.armySelectorSize/2,p.y);
+       // FisicaArmy3.fiscaArmy3.text(soldierMover.getStateName(),p.x+GameConstants.armySelectorSize/2,p.y+25);
 
     }
 
+    @Override
     public void contactStarted(FContact c) {
         moverState.contactStarted(c);
         soldierMover.contactStarted(c);
@@ -96,7 +104,8 @@ public class ArmyMover {
         return result;
     }
 
-    PVector getArmyCenter(){
+    @Override
+    public PVector getArmyCenter(){
         return soldierMover.meanSoldierPosition();
     }
 
@@ -109,10 +118,12 @@ public class ArmyMover {
     }
 
 
+    @Override
     public void commandArmyHeading(float x, float y) {
         soldierMover.commandArmyHeading(x,y);
     }
 
+    @Override
     public void commandArmyPosition(float x, float y) {
         soldierMover.commandArmyPosition(x,y);
     }

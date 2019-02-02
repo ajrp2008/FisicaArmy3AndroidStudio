@@ -23,6 +23,8 @@ class SoldiersMover {
     private int armySize = 25;
     private float r, g, b;
 
+    private PVector meanSoldierPosition = new PVector();
+
     SoldiersMover(float x, float y, String name, float r, float g, float b, ArmyMover armyMover) {
         this.armyMover = armyMover;
         armyState = armyMarch;
@@ -54,18 +56,21 @@ class SoldiersMover {
     }
 
     PVector meanSoldierPosition() {
-        PVector meanPos = new PVector();
+        //the last calculated mean soldier position
+        return meanSoldierPosition;
+    }
+
+    private void calculatMeanSoldierPosition() {
+         meanSoldierPosition.set(0,0);
         int sizeAlive = 0;
         for (Soldier s : soldiers) {
             if (s.isAlive) {
-                meanPos.add(s.getX(), s.getY());
+                meanSoldierPosition.add(s.getX(), s.getY());
                 sizeAlive++;
             }
         }
         armySize = sizeAlive;
-        meanPos.div(sizeAlive);
-
-        return meanPos;
+        meanSoldierPosition.div(sizeAlive);
     }
 
     float armySizeAlive() {
@@ -93,6 +98,7 @@ class SoldiersMover {
     }
 
     void updateArmy() {
+        calculatMeanSoldierPosition();
         armyState.updateArmySoldiers();
         armyState.updateState();
     }
