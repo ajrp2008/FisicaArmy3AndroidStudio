@@ -5,7 +5,7 @@ import processing.core.PVector;
 
 public interface ArmyMoverType {
 
-    ArmyMover firstSelectionArmy(float x, float y);
+    ArmyMoverType firstSelectionArmy(float x, float y);
 
     void secondSelection(float x, float y);
 

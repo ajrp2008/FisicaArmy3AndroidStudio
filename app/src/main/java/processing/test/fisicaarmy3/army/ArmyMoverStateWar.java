@@ -16,7 +16,7 @@ class ArmyMoverStateWar implements ArmyMoverState {
         this.armyMover = armyMover;
     }
 
-    public ArmyMover firstSelectionArmy(float x, float y) {
+    public ArmyMoverType firstSelectionArmy(float x, float y) {
         ArmyMover newSelectedArmy = null;
         //FIRST SELECTION: SELECT THIS ARMY
         if(armyMover.isInsideArmyArea(x,y)){

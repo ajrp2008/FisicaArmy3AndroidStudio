@@ -3,10 +3,9 @@ package processing.test.fisicaarmy3;
 import java.util.ArrayList;
 
 import processing.core.PVector;
-import processing.test.fisicaarmy3.FisicaArmy3;
-import processing.test.fisicaarmy3.army.ArmyMover;
 import processing.test.fisicaarmy3.army.ArmyMoverType;
 import processing.test.fisicaarmy3.utils.GameConstants;
+
 
 public class ArmySelector {
     private ArmyMoverType selectedArmy = null;

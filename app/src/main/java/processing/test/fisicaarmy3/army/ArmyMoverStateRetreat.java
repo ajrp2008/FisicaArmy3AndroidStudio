@@ -15,7 +15,7 @@ class ArmyMoverStateRetreat implements ArmyMoverState {
         this.armyMover = armyMover;
     }
 
-    public ArmyMover firstSelectionArmy(float x, float y) {
+    public ArmyMoverType firstSelectionArmy(float x, float y) {
         return null;
     }
 

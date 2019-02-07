@@ -20,8 +20,12 @@ public class ArmyFootSoldiers implements ArmyMoverType {
     private ArmyFootSoldiers(){
     }
 
-    public ArmyMover firstSelectionArmy(float x, float y) {
-        return mover.firstSelectionArmy(x,y);
+    public ArmyMoverType firstSelectionArmy(float x, float y) {
+        ArmyMoverType result = null;
+        if(mover.firstSelectionArmy(x,y)!=null){
+            result = this;
+        }
+        return result;
     }
 
     @Override
@@ -55,7 +59,6 @@ public class ArmyFootSoldiers implements ArmyMoverType {
         PVector p = mover.getArmyCenter();
         FisicaArmy3.fiscaArmy3.noFill();
         FisicaArmy3.fiscaArmy3.ellipse(p.x,p.y, GameConstants.armySelectorSize*3,GameConstants.armySelectorSize*3);
-
     }
 
     @Override

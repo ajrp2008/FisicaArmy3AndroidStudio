@@ -30,7 +30,7 @@ public class ArmyMover implements ArmyMoverType {
     }
 
     @Override
-    public ArmyMover firstSelectionArmy(float x, float y) {
+    public ArmyMoverType firstSelectionArmy(float x, float y) {
         return moverState.firstSelectionArmy(x, y);
     }
 

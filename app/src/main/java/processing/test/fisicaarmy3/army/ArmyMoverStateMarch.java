@@ -28,12 +28,10 @@ class ArmyMoverStateMarch implements ArmyMoverState {
     nextPoint = null;
   }
 
-  public ArmyMover firstSelectionArmy(float x, float y) {
+  public ArmyMoverType firstSelectionArmy(float x, float y) {
     ArmyMover newSelectedArmy = null;
-    //PVector msp = armyMover.soldierMover.meanSoldierPosition();
 
     //FIRST SELECTION: SELECT THIS ARMY
-    //if (PApplet.dist(msp.x, msp.y, x, y) < GameConstants.armySelectorSize /2){
     if(armyMover.isInsideArmyArea(x,y)){
       newSelectedArmy = armyMover;
     }
@@ -52,10 +50,7 @@ class ArmyMoverStateMarch implements ArmyMoverState {
   public void dragFromArmy(float x, float y) {
     //DRAG : ONLY WHEN NOT ARMY SELECTED AND NOT ROUTE APPROVED
     if(approveRoute || armyMover.isInsideArmyArea(x,y))return;
-   // PVector msp = armyMover.soldierMover.meanSoldierPosition();
-    //if (approveRoute || PApplet.dist(msp.x, msp.y, x, y) < GameConstants.armySelectorSize /2)return;//armyMover.armySelectorSize / 2) return;
-
-    //DRAG : NEW WAYPOINT WHEN DISTANCE MORE THAN GAP!
+   //DRAG : NEW WAYPOINT WHEN DISTANCE MORE THAN GAP!
     PVector lastPoint = wayPoints.isEmpty() ? armyMover.getArmyCenter() : wayPoints.get(wayPoints.size() - 1);
     float distance = PApplet.dist(lastPoint.x, lastPoint.y, x, y);
       if(distance > GameConstants.wayPointGap)
@@ -63,7 +58,6 @@ class ArmyMoverStateMarch implements ArmyMoverState {
   }
 
   public void secondSelection(float x, float y) {
-    PApplet.println("Please move");
     //SECOND SELECTION: ONLY WHEN WAYPOINTS EXISTS
     if (wayPoints.isEmpty()) return;
 
@@ -76,8 +70,6 @@ class ArmyMoverStateMarch implements ArmyMoverState {
     }
 
     //SECOND SELECTION:  Select army again and route exists -> delete route!
-    //PVector msp = armyMover.soldierMover.meanSoldierPosition();
-   // if (PApplet.dist(msp.x, msp.y, x, y) < GameConstants.armySelectorSize /2 / 2 && !wayPoints.isEmpty()) {
       if (armyMover.isInsideArmyArea(x,y) && !wayPoints.isEmpty()) {
         wayPoints.clear();
       nextPoint = null;

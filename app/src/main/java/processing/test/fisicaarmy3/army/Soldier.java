@@ -56,7 +56,6 @@ public class Soldier extends FCircle {
   public boolean isMarching() {
     float e = PApplet.dist(getX(), getY(), army.getAbsolutPosition().x+relPosition.x, army.getAbsolutPosition().y+relPosition.y);
     if (e > 8) {
-      PApplet.println(FisicaArmy3.fiscaArmy3.frameCount+"I MARCH"+this.getVelocityX());
       return true;
     } else {
       return false;
@@ -65,9 +64,7 @@ public class Soldier extends FCircle {
 
   public void attack(Soldier opponent) {
     int x = (int) FisicaArmy3.fiscaArmy3.random(1, 100);
-    //println("hit x:"+x);
     if (x<2) {
-      //println("There is at hit :"+ x + "SOLDIER DEAD !!!");
       opponent.isAlive = false;
       FisicaArmy3.fiscaArmy3.world.remove(opponent);
      // opponent.army.soldiers.remove(opponent);
