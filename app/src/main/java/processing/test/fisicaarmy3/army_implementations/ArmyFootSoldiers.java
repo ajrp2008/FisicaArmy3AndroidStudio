@@ -36,6 +36,7 @@ public class ArmyFootSoldiers implements ArmyMoverType {
     @Override
     public void update() {
         mover.update();
+        shootArrowsUpdate(FisicaArmy3.shootArrowsFlag);
     }
 
     @Override
@@ -80,4 +81,11 @@ public class ArmyFootSoldiers implements ArmyMoverType {
     public void commandArmyPosition(float x, float y) {
         mover.commandArmyPosition(x,y);
     }
+
+
+    public void shootArrowsUpdate(boolean shoot){
+        
+
+    }
+
 }

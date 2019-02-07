@@ -22,6 +22,9 @@ public class Button {
   public void display(){
     fisicaArmy3.fill(r,g,b);
     fisicaArmy3.rect(x,y,w,h,20);
+    fisicaArmy3.textSize(50);
+    fisicaArmy3.fill(255,255,255);
+    fisicaArmy3.text(text,x+20,y+h/2+10);
   }
 
   public void setText(String text){

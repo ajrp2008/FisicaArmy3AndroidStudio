@@ -9,7 +9,7 @@ import processing.test.fisicaarmy3.utils.GameConstants;
 
 public class Soldier extends FCircle {
 
-  PVector relPosition    =  new PVector();
+  PVector relPosition;
   private SoldiersMover army;
 
   boolean  isAlive        = true;

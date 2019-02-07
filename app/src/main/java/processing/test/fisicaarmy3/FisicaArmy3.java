@@ -21,6 +21,12 @@ public class FisicaArmy3 extends PApplet {
     private Button resetButton;
     private float buttonHeight = 100, buttonWidth = 300, buttonGap = 50, buttonTopGap = 50, buttonLeftGap = 50;
 
+    private Button arrowsButton;
+
+    //shoot arrows - debug test
+    public static boolean shootArrowsFlag = false;
+
+
 
     public void setup() {
 
@@ -34,6 +40,9 @@ public class FisicaArmy3 extends PApplet {
 
         resetButton = new Button(this, width - (buttonWidth + buttonLeftGap), (buttonTopGap + 3 * buttonHeight + 2 * buttonGap), buttonWidth, buttonHeight);
         resetButton.setText("Reset");
+
+        arrowsButton = new Button(this, width - (buttonWidth + buttonLeftGap), (buttonTopGap + 4 * buttonHeight + 4 * buttonGap), buttonWidth, buttonHeight);
+        arrowsButton.setText("arrows");
     }
 
     private void initGame() {
@@ -73,6 +82,7 @@ public class FisicaArmy3 extends PApplet {
         zoomInButton.display();
         zoomOutButton.display();
         resetButton.display();
+        arrowsButton.display();
     }
 
     public void mousePressed() {
@@ -86,6 +96,10 @@ public class FisicaArmy3 extends PApplet {
         }
         if (resetButton.isPushed(mouseX, mouseY)) {
             resetButton_click();
+            return;
+        }
+        if (arrowsButton.isPushed(mouseX, mouseY)) {
+            arrowsButton_click();
             return;
         }
 
@@ -105,6 +119,10 @@ public class FisicaArmy3 extends PApplet {
         initGame();
     }
 
+    public void arrowsButton_click() {
+
+    }
+
     public void mouseDragged() {
         if (zoomInButton.isPressed() || zoomOutButton.isPressed() || resetButton.isPressed()) {
             return;
@@ -120,6 +138,7 @@ public class FisicaArmy3 extends PApplet {
         zoomInButton.release();
         zoomOutButton.release();
         resetButton.release();
+        arrowsButton.release();
     }
 
     public void zoomMap(float zoom) {
