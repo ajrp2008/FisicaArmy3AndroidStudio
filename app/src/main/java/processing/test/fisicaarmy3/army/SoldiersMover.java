@@ -7,7 +7,7 @@ import processing.core.PVector;
 import processing.test.fisicaarmy3.FisicaArmy3;
 import processing.test.fisicaarmy3.utils.GameConstants;
 
-class SoldiersMover {
+public class SoldiersMover {
 
     private String name;
 
@@ -20,12 +20,14 @@ class SoldiersMover {
 
     private ArrayList<Soldier> soldiers = new ArrayList<Soldier>();
     private PVector absolutPosition = new PVector();
-    private int armySize = 25;
-    private float r, g, b;
+    protected int armySize = 25;
+    protected float r;
+    protected float g;
+    protected float b;
 
     private PVector meanSoldierPosition = new PVector();
 
-    SoldiersMover(float x, float y, String name, float r, float g, float b, ArmyMover armyMover) {
+    public SoldiersMover(float x, float y, String name, float r, float g, float b, ArmyMover armyMover) {
         this.armyMover = armyMover;
         armyState = armyMarch;
         getAbsolutPosition().set(x, y);
@@ -38,6 +40,7 @@ class SoldiersMover {
     }
 
     public void createSoldiers() {
+        System.out.println("CREATE ORIGINAL SOLDIERS");
         for (int i = 0; i < armySize; i++) {
             Soldier s = new Soldier(this, new PVector());
             s.setFill(r, g, b);
@@ -45,7 +48,7 @@ class SoldiersMover {
         }
     }
 
-    public void initSquareFormation() {
+    private void initSquareFormation() {
         for (int i = 0; i < soldiers.size(); i++) {
             float length = (float) Math.sqrt(soldiers.size());
             int column = i % (int) length;
@@ -77,11 +80,11 @@ class SoldiersMover {
         return armySize;
     }
 
-    void updateArmyToZoom() {
+    public void updateArmyToZoom() {
         armyState.updateArmyToZoom();
     }
 
-    void updateMapPosition(float dx, float dy) {
+    public void updateMapPosition(float dx, float dy) {
         getAbsolutPosition().add(dx, dy);
         armyState.updateMapPosition(dx,dy);
         for (Soldier s : soldiers) {
@@ -151,11 +154,11 @@ class SoldiersMover {
         return armyState.toString();
     }
 
-    public PVector getAbsolutPosition() {
+    PVector getAbsolutPosition() {
         return absolutPosition;
     }
 
-    public ArrayList<Soldier> getSoldiers() {
+    protected ArrayList<Soldier> getSoldiers() {
         return soldiers;
     }
 

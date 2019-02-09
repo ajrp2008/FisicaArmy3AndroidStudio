@@ -5,7 +5,8 @@ import processing.core.*;
 import fisica.*;
 import processing.test.fisicaarmy3.army.ArmyMover;
 import processing.test.fisicaarmy3.army.Soldier;
-import processing.test.fisicaarmy3.army_implementations.ArmyFootSoldiers;
+import processing.test.fisicaarmy3.army_archers_implementation.ArmyArchersMover;
+import processing.test.fisicaarmy3.army_test_implementations.ArmyFootSoldiers;
 import processing.test.fisicaarmy3.gui.Button;
 import processing.test.fisicaarmy3.utils.GameConstants;
 
@@ -53,7 +54,7 @@ public class FisicaArmy3 extends PApplet {
         ellipseMode(CENTER);
         GameConstants.initGameConstants();
         armySelector = new ArmySelector();
-        armySelector.addArmy(ArmyFootSoldiers.createArmy(100, 100, "A", 0, 255, 0));
+        armySelector.addArmy(ArmyArchersMover.createArmy(100, 100, "A", 0, 255, 0));
         armySelector.addArmy(ArmyMover.createArmy(200, 150, "B", 255, 255, 255));
         armySelector.addArmy(ArmyMover.createArmy(100, 200, "C", 200, 0, 0));
         armySelector.addArmy(ArmyMover.createArmy(400, 100, "A", 0, 255, 0));
@@ -120,7 +121,7 @@ public class FisicaArmy3 extends PApplet {
     }
 
     public void arrowsButton_click() {
-
+        shootArrowsFlag = true;
     }
 
     public void mouseDragged() {
@@ -152,6 +153,7 @@ public class FisicaArmy3 extends PApplet {
     }
 
     public void contactStarted(FContact c) {
+        if(!(c.getBody1() instanceof Soldier) || !(c.getBody2() instanceof Soldier) ) return;
         if (!c.getBody1().getName().equals(c.getBody2().getName())) {
             Soldier s1 = (Soldier) c.getBody1();
             Soldier s2 = (Soldier) c.getBody2();

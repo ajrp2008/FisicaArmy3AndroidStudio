@@ -15,7 +15,7 @@ public class ArmyMover implements ArmyMoverType {
 
     private SoldiersMover soldierMover;
 
-    private ArmyMover(){}
+    public ArmyMover(){}
 
     public static ArmyMover createArmy(float x, float y, String name, float r, float g, float b){
         ArmyMover       armyMover       = new ArmyMover();
@@ -25,7 +25,7 @@ public class ArmyMover implements ArmyMoverType {
         return armyMover;
     }
 
-    private void setSoldierMover(SoldiersMover soldierMover){
+    protected void setSoldierMover(SoldiersMover soldierMover){
         this.soldierMover = soldierMover;
     }
 
@@ -127,4 +127,6 @@ public class ArmyMover implements ArmyMoverType {
     public void commandArmyPosition(float x, float y) {
         soldierMover.commandArmyPosition(x,y);
     }
+
+
 }

@@ -1,4 +1,4 @@
-package processing.test.fisicaarmy3.army_implementations;
+package processing.test.fisicaarmy3.army_test_implementations;
 
 import fisica.FContact;
 import processing.core.PVector;
