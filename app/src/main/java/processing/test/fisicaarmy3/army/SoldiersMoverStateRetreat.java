@@ -52,5 +52,10 @@ class SoldiersMoverStateRetreat implements SoldiersMoveState {
 
     }
 
+    @Override
+    public Float getArmyHeading() {
+        return null;
+    }
+
 
 }

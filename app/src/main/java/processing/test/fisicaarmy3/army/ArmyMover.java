@@ -66,7 +66,13 @@ public class ArmyMover implements ArmyMoverType {
     public void display(boolean selected) {
         soldierMover.updateArmyColors(selected);
         moverState.display(selected);
-        PVector p = getArmyCenter();
+        Float heading = soldierMover.getArmyHeading();
+        if(heading!=null){
+            PVector p = getArmyCenter();
+            PVector p2= new PVector(GameConstants.armySelectorSize,0);
+            p2.rotate(heading);
+            FisicaArmy3.fiscaArmy3.line(p.x,p.y,p.x+p2.x,p.y+p2.y);
+        }
        // FisicaArmy3.fiscaArmy3.text(moverState.toString(),p.x+ GameConstants.armySelectorSize/2,p.y);
        // FisicaArmy3.fiscaArmy3.text(soldierMover.getStateName(),p.x+GameConstants.armySelectorSize/2,p.y+25);
 

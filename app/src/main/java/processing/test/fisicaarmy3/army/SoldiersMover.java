@@ -100,6 +100,10 @@ public class SoldiersMover {
         armyState.commandArmyHeading(x, y);
     }
 
+    public Float getArmyHeading(){
+        return armyState.getArmyHeading();
+    }
+
     void updateArmy() {
         calculatMeanSoldierPosition();
         armyState.updateArmySoldiers();

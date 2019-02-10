@@ -62,6 +62,11 @@ class SoldiersMoverStateWar implements SoldiersMoveState {
         this.positionContact.add(dx, dy);
     }
 
+    @Override
+    public Float getArmyHeading() {
+        return null;
+    }
+
     public boolean isMarching() {
         return true;
     }

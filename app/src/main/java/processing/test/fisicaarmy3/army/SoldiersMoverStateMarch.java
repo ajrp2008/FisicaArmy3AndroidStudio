@@ -53,6 +53,11 @@ class SoldiersMoverStateMarch implements SoldiersMoveState {
 
     }
 
+    @Override
+    public Float getArmyHeading() {
+        return this.heading;
+    }
+
     public boolean isMarching() {
         return isMarching;
     }

@@ -26,7 +26,7 @@ public class SoldierArcherMover extends SoldiersMover {
         for (Soldier s : getSoldiers()) {
             //s.setSize(s.getSize());
             //s.setPosition(s.getX(),s.getY());
-            ((SoldierArcher) s).shoot();
+            ((SoldierArcher) s).shoot(getArmyHeading());
         }
     }
 

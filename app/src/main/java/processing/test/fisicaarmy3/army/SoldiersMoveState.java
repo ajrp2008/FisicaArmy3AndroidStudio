@@ -20,4 +20,5 @@ interface SoldiersMoveState {
 
     void updateMapPosition(float dx, float dy);
 
+    Float getArmyHeading();
 }

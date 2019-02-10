@@ -1,11 +1,13 @@
 package processing.test.fisicaarmy3.army_archers_implementation;
 
 import fisica.FCircle;
+import processing.core.PVector;
 import processing.test.fisicaarmy3.FisicaArmy3;
 
 public class Arrow extends FCircle {
 
     boolean isFlying = false;
+    PVector p = new PVector(130,0);
 
     public Arrow(float v,float x,float y) {
         super(v);
@@ -16,10 +18,12 @@ public class Arrow extends FCircle {
         FisicaArmy3.fiscaArmy3.world.add(this);
     }
 
-    public void shot(float x,float y){
+    public void shot(float x,float y, float angle){
         System.out.println("Shooting");
         setPosition(x,y);
-        setVelocity(130,130);
+        p.set(130,0);
+        p.rotate(angle);
+        setVelocity(p.x,p.y);
     }
 
 }
