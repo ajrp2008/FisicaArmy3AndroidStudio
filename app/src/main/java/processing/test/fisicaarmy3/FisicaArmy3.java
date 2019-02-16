@@ -5,6 +5,7 @@ import processing.core.*;
 import fisica.*;
 import processing.test.fisicaarmy3.army.ArmyMover;
 import processing.test.fisicaarmy3.army.Soldier;
+import processing.test.fisicaarmy3.army_archers_implementation.ArchersShootingArea;
 import processing.test.fisicaarmy3.army_archers_implementation.ArmyArchersMover;
 import processing.test.fisicaarmy3.army_test_implementations.ArmyFootSoldiers;
 import processing.test.fisicaarmy3.gui.Button;
@@ -57,7 +58,7 @@ public class FisicaArmy3 extends PApplet {
         armySelector.addArmy(ArmyArchersMover.createArmy(100, 100, "A", 0, 255, 0));
         armySelector.addArmy(ArmyMover.createArmy(200, 150, "B", 255, 255, 255));
         armySelector.addArmy(ArmyMover.createArmy(100, 200, "C", 200, 0, 0));
-        armySelector.addArmy(ArmyMover.createArmy(400, 100, "A", 0, 255, 0));
+        armySelector.addArmy(ArmyArchersMover.createArmy(400, 100, "A", 0, 255, 0));
         armySelector.addArmy(ArmyMover.createArmy(600, 150, "B", 255, 255, 255));
         armySelector.addArmy(ArmyMover.createArmy(400, 200, "C", 200, 0, 0));
         //Initial zoom based on screen size
@@ -66,7 +67,7 @@ public class FisicaArmy3 extends PApplet {
     }
 
     public void draw() {
-        background(50);
+        background(0);
         //DEBUG TEXT
         textSize(40);
         fill(200, 0, 0);
@@ -153,6 +154,15 @@ public class FisicaArmy3 extends PApplet {
     }
 
     public void contactStarted(FContact c) {
+         boolean enteringArchersZone1 = c.getBody1() instanceof ArchersShootingArea && c.getBody2() instanceof  Soldier;
+        if(enteringArchersZone1){
+           ArchersShootingArea shootZone = ((ArchersShootingArea)c.getBody1());
+            Soldier s2 = ((Soldier)c.getBody2());
+            if(!shootZone.getName().equals(s2.getName())){
+                // shoot
+            }
+        }
+
         if(!(c.getBody1() instanceof Soldier) || !(c.getBody2() instanceof Soldier) ) return;
         if (!c.getBody1().getName().equals(c.getBody2().getName())) {
             Soldier s1 = (Soldier) c.getBody1();

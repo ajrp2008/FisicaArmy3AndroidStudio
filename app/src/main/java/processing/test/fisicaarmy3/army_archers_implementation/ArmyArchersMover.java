@@ -16,7 +16,7 @@ public class ArmyArchersMover extends ArmyMover {
         SoldierArcherMover   soldiersMover   = new SoldierArcherMover(x,y,name,r,g,b,armyMover);
         armyMover.setSoldierMover(soldiersMover);
         armyMover.soldierArcherMover = soldiersMover;
-        armyMover.shootingArea = new ArchersShootingArea(30,armyMover);
+        armyMover.shootingArea = new ArchersShootingArea(30,armyMover,name);
         armyMover.shootingArea.setSensor(true);
         FisicaArmy3.fiscaArmy3.world.add(armyMover.shootingArea);
         return armyMover;
@@ -37,8 +37,13 @@ public class ArmyArchersMover extends ArmyMover {
         this.shootingArea.setPosition(p.x,p.y);
         this.shootingArea.setSize( GameConstants.armySelectorSize*3);
         if(FisicaArmy3.shootArrowsFlag){
-            soldierArcherMover.shot();
-            FisicaArmy3.shootArrowsFlag = false;
+            shoot();
         }
     }
+
+    private void shoot() {
+        soldierArcherMover.shot();
+        FisicaArmy3.shootArrowsFlag = false;
+    }
+
 }
