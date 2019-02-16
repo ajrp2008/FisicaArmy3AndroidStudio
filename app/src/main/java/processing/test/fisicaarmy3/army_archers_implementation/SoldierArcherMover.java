@@ -4,7 +4,6 @@ import processing.core.PVector;
 import processing.test.fisicaarmy3.army.ArmyMover;
 import processing.test.fisicaarmy3.army.Soldier;
 import processing.test.fisicaarmy3.army.SoldiersMover;
-import processing.test.fisicaarmy3.utils.GameConstants;
 
 public class SoldierArcherMover extends SoldiersMover {
 
@@ -36,7 +35,7 @@ public class SoldierArcherMover extends SoldiersMover {
         for (Soldier s : getSoldiers()) {
             Arrow a = ((SoldierArcher) s).arrow;
             if(a == null) continue;
-            a.setPosition(a.getX() + dx, a.getY() + dy);
+            a.updateMapPosArrow(dx, dy);
         }
     }
 
@@ -46,8 +45,8 @@ public class SoldierArcherMover extends SoldiersMover {
         for (Soldier s : getSoldiers()) {
             Arrow a = ((SoldierArcher) s).arrow;
             if(a == null) continue;
-            a.setSize(a.getSize()* GameConstants.zoomFactor);
-            a.setPosition(a.getX()* GameConstants.zoomFactor,a.getY()* GameConstants.zoomFactor);
+            a.updateToZoomArrow();
         }
     }
+
 }
