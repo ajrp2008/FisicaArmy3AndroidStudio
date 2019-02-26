@@ -8,7 +8,7 @@ import processing.test.fisicaarmy3.utils.GameConstants;
 
 public class Arrow extends FCircle {
 
-    private boolean outOfRange = false;
+    private boolean airBorn = false;
     private PVector velocity  = new PVector(130, 0);
     private PVector start     = new PVector(0,0);
     private float maxRange    = 500;
@@ -24,7 +24,7 @@ public class Arrow extends FCircle {
     void shot(float x, float y, float angle) {
         System.out.println("Shooting");
 
-        outOfRange = false;
+        airBorn = false;
 
         setPosition(x, y);
         start.set(x,y);
@@ -39,11 +39,11 @@ public class Arrow extends FCircle {
 
     @Override
     public void draw(PGraphics pGraphics) {
-        if(!outOfRange)super.draw(pGraphics);
+        if(!airBorn)super.draw(pGraphics);
 
         float range = FisicaArmy3.dist(start.x,start.y,getX(),getY());
         if(range > maxRange) {
-            outOfRange = true;
+            airBorn = true;
             FisicaArmy3.fiscaArmy3.world.remove(this);
         }
     }
