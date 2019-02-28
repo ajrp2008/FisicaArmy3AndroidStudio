@@ -71,8 +71,9 @@ public class Soldier extends FCircle implements SoldierType {
   public void attack(Soldier opponent) {
     int x = (int) FisicaArmy3.fiscaArmy3.random(1, 100);
     if (x<2) {
-      opponent.isAlive = false;
-      FisicaArmy3.fiscaArmy3.world.remove(opponent);
+      opponent.killSoldier();
+     // opponent.isAlive = false;
+      //FisicaArmy3.fiscaArmy3.world.remove(opponent);
      // opponent.army.soldiers.remove(opponent);
     }
   }
@@ -80,6 +81,15 @@ public class Soldier extends FCircle implements SoldierType {
   @Override
   public void contactTellSuperior(FContact c){
     this.army.contactTellSuperior(c);
+  }
+
+  public boolean isSoldierAlive(){
+    return isAlive;
+  }
+
+  public void killSoldier(){
+    this.isAlive = false;
+    FisicaArmy3.fiscaArmy3.world.remove(this);
   }
 
 }

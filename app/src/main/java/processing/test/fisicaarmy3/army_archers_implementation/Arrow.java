@@ -4,6 +4,7 @@ import fisica.FCircle;
 import processing.core.PGraphics;
 import processing.core.PVector;
 import processing.test.fisicaarmy3.FisicaArmy3;
+import processing.test.fisicaarmy3.army.Soldier;
 import processing.test.fisicaarmy3.utils.GameConstants;
 
 public class Arrow extends FCircle {
@@ -58,4 +59,11 @@ public class Arrow extends FCircle {
        setPosition(getX()* GameConstants.zoomFactor, getY()* GameConstants.zoomFactor);
        start.mult(GameConstants.zoomFactor);
    }
+
+   public void hitSoldier(Soldier s){
+        s.killSoldier();
+        airBorn = false;
+        System.out.println("I hit him");
+   }
+
 }

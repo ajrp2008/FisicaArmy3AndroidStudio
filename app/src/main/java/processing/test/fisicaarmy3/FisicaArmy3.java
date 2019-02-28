@@ -7,6 +7,7 @@ import processing.test.fisicaarmy3.army.ArmyMover;
 import processing.test.fisicaarmy3.army.Soldier;
 import processing.test.fisicaarmy3.army_archers_implementation.ArchersShootingArea;
 import processing.test.fisicaarmy3.army_archers_implementation.ArmyArchersMover;
+import processing.test.fisicaarmy3.army_archers_implementation.Arrow;
 import processing.test.fisicaarmy3.army_test_implementations.ArmyFootSoldiers;
 import processing.test.fisicaarmy3.gui.Button;
 import processing.test.fisicaarmy3.utils.GameConstants;
@@ -154,43 +155,35 @@ public class FisicaArmy3 extends PApplet {
     }
 
     public void contactStarted(FContact c) {
+
+        if(c.getBody1().getName().equals(c.getBody2().getName()))return; //DENNE LINJE KAN RYDDE OP I EN MASSE ....
+
+        boolean soldierIsShot1 = c.getBody1() instanceof Arrow && c.getBody2() instanceof  Soldier;
+        boolean soldierIsShot2 = c.getBody2() instanceof Arrow && c.getBody1() instanceof  Soldier;
+        if(soldierIsShot1 || soldierIsShot2 ) {
+            Arrow a = soldierIsShot1 ? ((Arrow)c.getBody1()) : ((Arrow)c.getBody2());
+            Soldier s = soldierIsShot1 ?  ((Soldier)c.getBody2()) : ((Soldier)c.getBody1());
+           // if(!s.getName().equals(a.getName()))
+                a.hitSoldier(s);
+        }
+
          boolean enteringArchersZone1 = c.getBody1() instanceof ArchersShootingArea && c.getBody2() instanceof  Soldier;
         if(enteringArchersZone1){
            ArchersShootingArea shootZone = ((ArchersShootingArea)c.getBody1());
             Soldier s2 = ((Soldier)c.getBody2());
-            if(!shootZone.getName().equals(s2.getName())){
+           // if(!shootZone.getName().equals(s2.getName())){
                 // shoot
-            }
+           // }
         }
 
         if(!(c.getBody1() instanceof Soldier) || !(c.getBody2() instanceof Soldier) ) return;
-        if (!c.getBody1().getName().equals(c.getBody2().getName())) {
+      //  if (!c.getBody1().getName().equals(c.getBody2().getName())) {
             Soldier s1 = (Soldier) c.getBody1();
             Soldier s2 = (Soldier) c.getBody2();
             s1.contactTellSuperior(c);
             s2.contactTellSuperior(c);
-            //s1.army.armyMover.contactStarted(c);
-            //s2.army.armyMover.contactStarted(c);
-        }
+       // }
     }
-/*
-    public void createSoldiers(SoldiersMover army) {
-        for (int i = 0; i < army.armySize; i++) {
-            Soldier s = new Soldier(army, new PVector());
-            s.setFill(army.r, army.g, army.b);
-            army.soldiers.add(s);
-        }
-    }
-*/
-   /* public void initSquareFormation(SoldiersMover army) {
-        for (int i = 0; i < army.soldiers.size(); i++) {
-            float length = sqrt(army.soldiers.size());
-            int column = i % (int) length;
-            int row = i / (int) length;
-            Soldier s = army.soldiers.get(i);
-            s.relPosition.set((column - (length - 1.0f) / 2.0f) * GameConstants.armyGapSizeStart * GameConstants.zoomFactor, (row - (length - 1) / 2) * GameConstants.armyGapSizeStart * GameConstants.zoomFactor);
-        }
-    }*/
 
     public void settings() {
        // size(1440, 2960);
