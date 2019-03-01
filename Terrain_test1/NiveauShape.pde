@@ -2,21 +2,33 @@ class NiveauShape extends FPoly{
 
   ArrayList<PVector> vertexes = new ArrayList<PVector>();
   
+  NiveauShape(){
+    super();
+    setStatic(true);
+    setFill(0);
+    setSensor(true);
+    setFriction(1);
+  }
+  
+  
   public void draw(processing.core.PGraphics graphics){
-  //  super.draw(graphics);
+    noFill();
+   // super.draw(graphics);
+    stroke(0);
+       ellipse(vertexes.get(0).x,vertexes.get(0).y,15,15);
+
+    
     noFill();
     stroke(255,0,0);
-    
     beginShape();
-    curveVertex(30, 20);
-    vertex(vertexes.get(0).x,vertexes.get(0).y);
+    
+    curveVertex(vertexes.get(vertexes.size()-2).x,vertexes.get(vertexes.size()-2).y);
+    curveVertex(vertexes.get(vertexes.size()-1).x,vertexes.get(vertexes.size()-1).y);
     for(PVector p : vertexes){
       curveVertex(p.x,p.y);
-    
+      ellipse(p.x,p.y,5,5);
     }
-    //curveVertex(vertexes.get(vertexes.size()-1).x,vertexes.get(vertexes.size()-1).y);
-    //curveVertex(vertexes.get(2).x,vertexes.get(2).y);
-   // bezierVertex(80, 0, 80, 75, 30, 75);
+    curveVertex(vertexes.get(vertexes.size()-1).x,vertexes.get(vertexes.size()-1).y);
     endShape();
     
     

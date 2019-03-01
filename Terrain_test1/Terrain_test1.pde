@@ -1,38 +1,36 @@
 import fisica.*;
-
 FWorld world;
+ArrayList<PVector> vList = new ArrayList<PVector>();
+boolean insertVertex = false;
+boolean createShape  = false; 
 
-int circleCount = 20;
-float hole = 50;
-float topMargin = 50;
-float bottomMargin = 300;
-float sideMargin = 100;
-float xPos = 0;
-
-void setup(){
-    size(800, 800);
+void setup() {
+  size(800, 800);
   smooth();
-
   Fisica.init(this);
-
   world = new FWorld();
   world.setGravity(0, 0);
-  
-  NiveauShape l = new NiveauShape();
-  l.vertex(100,100);
-  l.vertex(130, 200);
-  l.vertex(90, 300);
-  l.vertex(300, 350);
-  l.vertex(250, 200);
-  l.vertex(280, 110);
-  l.setStatic(true);
-  l.setFill(0);
-  l.setFriction(1);
-  world.add(l);
-  
 }
-
-void draw(){
+void draw() {
   world.step();
-  world.draw();
+  world.draw();  
+  for (PVector p : vList)ellipse(p.x, p.y, 5, 5);
+}
+void keyPressed() {
+  if (key == 'c') {println("create shape!");createAShape();} 
+  if (key == 'd') {println("clear points!");vList.clear();}
+}
+void insertVertex() {
+  vList.add(new PVector(mouseX, mouseY));
+}
+void createAShape() {  
+  if (!vList.isEmpty()) {
+    NiveauShape l = new NiveauShape();
+    for (PVector p : vList)l.vertex(p.x, p.y);
+    world.add(l);
+  }
+  vList.clear();
+}
+void mousePressed() {
+  insertVertex();
 }
