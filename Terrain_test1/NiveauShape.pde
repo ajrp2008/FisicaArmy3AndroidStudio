@@ -4,7 +4,6 @@ class NiveauShape extends FPoly{
   
   NiveauShape(){
     super();
-    setStatic(true);
     setFill(0);
     setSensor(true);
     setFriction(1);
@@ -12,13 +11,13 @@ class NiveauShape extends FPoly{
   
   
   public void draw(processing.core.PGraphics graphics){
-    noFill();
+   // noFill();
    // super.draw(graphics);
     stroke(0);
        ellipse(vertexes.get(0).x,vertexes.get(0).y,15,15);
 
     
-    noFill();
+    //noFill();
     stroke(255,0,0);
     beginShape();
     
