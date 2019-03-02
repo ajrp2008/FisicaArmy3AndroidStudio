@@ -16,6 +16,8 @@ void setup() {
   world = new FWorld();
   world.setGravity(0, 0);
   soldier = new Soldier();
+  
+  persistence.loadShapesFromTable();
 }
 
 void draw() {
