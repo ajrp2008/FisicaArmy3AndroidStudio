@@ -34,6 +34,7 @@ void keyPressed() {
 
   if (key == 'c') {
     println("create shape!");
+    persistence.addNewShape(vList);
     createAShape();
   } 
   if (key == 'd') {

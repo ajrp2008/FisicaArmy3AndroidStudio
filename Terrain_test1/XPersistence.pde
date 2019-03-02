@@ -2,17 +2,28 @@ class Persistence {
 
   Table table;
 
-  void saveToTable() {
+  Persistence(){
+    createTable();
+  }
 
+  void createTable(){
     table = new Table();
-
     table.addColumn("x");
-    table.addColumn("y");
+    table.addColumn("y");    
+  }
 
-    TableRow newRow = table.addRow();
-    newRow.setInt("x", 1);
-    newRow.setInt("y", 2);
+  void addNewShape(ArrayList<PVector> plist){
+      TableRow newRow = table.addRow();
+      newRow.setFloat("x", 10000);
+      newRow.setFloat("y", 10000);
+    for(PVector p: plist){
+      newRow = table.addRow();
+      newRow.setFloat("x", p.x);
+      newRow.setFloat("y", p.y);
+    }  
+  }
 
+  void saveToTable() {
     saveTable(table, "new.csv");
   }
 
