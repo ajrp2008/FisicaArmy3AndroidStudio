@@ -1,4 +1,7 @@
 class Soldier extends FCircle{
+  
+  float level = 0;
+  
   Soldier(){
     super(20);
     this.setPosition(100,100);
