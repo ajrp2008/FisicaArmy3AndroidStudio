@@ -30,6 +30,8 @@ void draw() {
   for (PVector p : vList)ellipse(p.x, p.y, 5, 5);
 
   //println("BODIES:"+world.getBodies().size());
+  if(soldier!=null)soldier.update();
+  
 }
 
 void keyPressed() {
@@ -105,4 +107,8 @@ void contact(FContact c, boolean value, float addLevel) {
 
 void mousePressed() {
   insertVertex();
+  if(soldier!=null){
+    soldier.setTargetPosition(mouseX,mouseY);
+  }
+  
 }
