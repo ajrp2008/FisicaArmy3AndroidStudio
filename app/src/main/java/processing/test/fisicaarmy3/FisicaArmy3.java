@@ -1,5 +1,9 @@
 package processing.test.fisicaarmy3;
 
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
+
 import processing.core.*;
 
 import fisica.*;
@@ -10,10 +14,12 @@ import processing.test.fisicaarmy3.army_archers_implementation.ArmyArchersMover;
 import processing.test.fisicaarmy3.army_archers_implementation.Arrow;
 import processing.test.fisicaarmy3.army_test_implementations.ArmyFootSoldiers;
 import processing.test.fisicaarmy3.gui.Button;
+import processing.test.fisicaarmy3.terrain.TerrainGenerator;
 import processing.test.fisicaarmy3.utils.GameConstants;
 
-public class FisicaArmy3 extends PApplet {
+public class FisicaArmy3 extends PAppletFisicaArmy {
 
+    public static MainActivity mainActivity;
     //comment
     public static FisicaArmy3 fiscaArmy3;
     public FWorld world;
@@ -37,13 +43,10 @@ public class FisicaArmy3 extends PApplet {
 
         zoomInButton = new Button(this, width - (buttonWidth + buttonLeftGap), (buttonTopGap), buttonWidth, buttonHeight);
         zoomInButton.setText("Zoom In");
-
         zoomOutButton = new Button(this, width - (buttonWidth + buttonLeftGap), (buttonTopGap + buttonHeight + buttonGap), buttonWidth, buttonHeight);
         zoomOutButton.setText("Zoom Out");
-
         resetButton = new Button(this, width - (buttonWidth + buttonLeftGap), (buttonTopGap + 3 * buttonHeight + 2 * buttonGap), buttonWidth, buttonHeight);
         resetButton.setText("Reset");
-
         arrowsButton = new Button(this, width - (buttonWidth + buttonLeftGap), (buttonTopGap + 4 * buttonHeight + 4 * buttonGap), buttonWidth, buttonHeight);
         arrowsButton.setText("arrows");
     }
@@ -55,6 +58,11 @@ public class FisicaArmy3 extends PApplet {
         world.setGravity(0, 0);
         ellipseMode(CENTER);
         GameConstants.initGameConstants();
+
+        TerrainGenerator t = new TerrainGenerator();
+        t.loadShapesFromTable();
+      //  t.saveToTable();
+
         armySelector = new ArmySelector();
         armySelector.addArmy(ArmyArchersMover.createArmy(100, 100, "A", 0, 255, 0));
         armySelector.addArmy(ArmyMover.createArmy(200, 150, "B", 255, 255, 255));
@@ -68,7 +76,7 @@ public class FisicaArmy3 extends PApplet {
     }
 
     public void draw() {
-        background(0);
+        background(20,60,10,60);
         //DEBUG TEXT
         textSize(40);
         fill(200, 0, 0);
@@ -76,8 +84,9 @@ public class FisicaArmy3 extends PApplet {
         //
         world.step();
         armySelector.update();
-        armySelector.drawSelector();
         world.draw();
+
+        armySelector.drawSelector();
         armySelector.drawSelectedArmy();
 
 
@@ -90,18 +99,26 @@ public class FisicaArmy3 extends PApplet {
 
     public void mousePressed() {
         if (zoomInButton.isPushed(mouseX, mouseY)) {
+            background(20,60,10);
+
             zoomInButton_click();
             return;
         }
         if (zoomOutButton.isPushed(mouseX, mouseY)) {
+            background(20,60,10);
+
             zoomOutButton_click();
             return;
         }
         if (resetButton.isPushed(mouseX, mouseY)) {
+            background(20,60,10);
+
             resetButton_click();
             return;
         }
         if (arrowsButton.isPushed(mouseX, mouseY)) {
+            background(20,60,10);
+
             arrowsButton_click();
             return;
         }
@@ -156,14 +173,14 @@ public class FisicaArmy3 extends PApplet {
 
     public void contactStarted(FContact c) {
 
-        if(c.getBody1().getName().equals(c.getBody2().getName()))return; //DENNE LINJE KAN RYDDE OP I EN MASSE ....
+       // if(c.getBody1().getName().equals(c.getBody2().getName()))return; //DENNE LINJE KAN RYDDE OP I EN MASSE ....
 
         boolean soldierIsShot1 = c.getBody1() instanceof Arrow && c.getBody2() instanceof  Soldier;
         boolean soldierIsShot2 = c.getBody2() instanceof Arrow && c.getBody1() instanceof  Soldier;
         if(soldierIsShot1 || soldierIsShot2 ) {
             Arrow a = soldierIsShot1 ? ((Arrow)c.getBody1()) : ((Arrow)c.getBody2());
             Soldier s = soldierIsShot1 ?  ((Soldier)c.getBody2()) : ((Soldier)c.getBody1());
-           // if(!s.getName().equals(a.getName()))
+            if(!s.getName().equals(a.getName()))
                 a.hitSoldier(s);
         }
 
@@ -171,18 +188,18 @@ public class FisicaArmy3 extends PApplet {
         if(enteringArchersZone1){
            ArchersShootingArea shootZone = ((ArchersShootingArea)c.getBody1());
             Soldier s2 = ((Soldier)c.getBody2());
-           // if(!shootZone.getName().equals(s2.getName())){
+            if(!shootZone.getName().equals(s2.getName())){
                 // shoot
-           // }
+            }
         }
 
         if(!(c.getBody1() instanceof Soldier) || !(c.getBody2() instanceof Soldier) ) return;
-      //  if (!c.getBody1().getName().equals(c.getBody2().getName())) {
+        if (!c.getBody1().getName().equals(c.getBody2().getName())) {
             Soldier s1 = (Soldier) c.getBody1();
             Soldier s2 = (Soldier) c.getBody2();
             s1.contactTellSuperior(c);
             s2.contactTellSuperior(c);
-       // }
+        }
     }
 
     public void settings() {

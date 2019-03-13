@@ -22,6 +22,7 @@ public class MainActivity extends AppCompatActivity {
                                                      ViewGroup.LayoutParams.MATCH_PARENT));
     
     sketch = new FisicaArmy3();
+    ((FisicaArmy3) sketch).mainActivity = this;
     
     PFragment fragment = new PFragment(sketch);
     fragment.setView(frame, this);

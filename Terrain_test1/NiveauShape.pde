@@ -2,7 +2,7 @@ class NiveauShape extends FPoly{
 
   ArrayList<PVector> vertexes = new ArrayList<PVector>();
   boolean isTouched = false;
-  
+  float vertexSize=50;
   
   NiveauShape(){
     super();
@@ -14,38 +14,30 @@ class NiveauShape extends FPoly{
   
   
   public void draw(processing.core.PGraphics graphics){
-   // noFill();
-   if(showBodies) super.draw(graphics);
-   
-    stroke(0);
-       ellipse(vertexes.get(0).x,vertexes.get(0).y,15,15);
 
+      graphics.fill(0,vertexSize,0);
     
-    noFill();
-    stroke(255,0,0);
-    if(isTouched){
-      fill(100,0,0,50);
-    }
+    graphics.beginShape();
     
-    beginShape();
-    
-    curveVertex(vertexes.get(vertexes.size()-2).x,vertexes.get(vertexes.size()-2).y);
-    curveVertex(vertexes.get(vertexes.size()-1).x,vertexes.get(vertexes.size()-1).y);
+    graphics.curveVertex(vertexes.get(vertexes.size()-2).x,vertexes.get(vertexes.size()-2).y);
+    graphics.curveVertex(vertexes.get(vertexes.size()-1).x,vertexes.get(vertexes.size()-1).y);
     for(PVector p : vertexes){
-      curveVertex(p.x,p.y);
-      ellipse(p.x,p.y,5,5);
+      graphics.curveVertex(p.x,p.y);
+      //ellipse(p.x,p.y,5,5);
     }
-    curveVertex(vertexes.get(vertexes.size()-1).x,vertexes.get(vertexes.size()-1).y);
-    endShape();
+    graphics.curveVertex(vertexes.get(vertexes.size()-1).x,vertexes.get(vertexes.size()-1).y);
+   graphics.endShape();
   }
   
   public void vertex(float x, float y){
     super.vertex(x,y);
     vertexes.add(new PVector(x,y));  
+    vertexSize = vertexSize +5;
   }
   
   void setTouched(boolean value){
     isTouched = value;
+    
    // println("Touch"+frameCount);
   }
 

@@ -10,7 +10,7 @@ Soldier     soldier;
 Persistence persistence  = new Persistence();
 
 void setup() {
-  size(800, 800);
+  size(1600, 800);
   smooth();
   Fisica.init(this);
   world = new FWorld();
