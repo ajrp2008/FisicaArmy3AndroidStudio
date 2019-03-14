@@ -1,5 +1,7 @@
 package processing.test.fisicaarmy3.terrain;
 
+import org.jbox2d.common.Vec2;
+
 import java.util.ArrayList;
 import fisica.FPoly;
 import processing.core.*;
@@ -43,6 +45,13 @@ class NiveauShape extends FPoly {
         super.vertex(x,y);
         vertexes.add(new PVector(x,y));
         vertexSize = vertexSize +10;
+    }
+
+    public void setZoom(float factor){
+        for(Object v: this.m_vertices){
+            ((Vec2)v).mulLocal(factor);
+            System.out.println("vertex er ændret!!" + m_vertices.indexOf(v));
+        }
     }
 
 }

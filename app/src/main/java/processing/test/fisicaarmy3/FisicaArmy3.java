@@ -155,6 +155,7 @@ public class FisicaArmy3 extends PAppletFisicaArmy {
         GameConstants.zoomFactor = zoom;
         GameConstants.zoomFactorAccumulated *= GameConstants.zoomFactor;
         armySelector.updateWithZoomFactor();
+        terrain.zoom(zoom);
     }
 
     public void moveMap(float dx, float dy) {

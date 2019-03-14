@@ -35,7 +35,7 @@ public class TerrainGenerator {
                     }
                     shapeList.clear();
                 } else {
-                    shapeList.add(new PVector(x*2f,y*2f));
+                    shapeList.add(new PVector(x,y));
                 }
             }}else{
             createTable();
@@ -55,5 +55,12 @@ public class TerrainGenerator {
         }
     }
 
+    public void zoom(float factor){
+        for (NiveauShape n : niveauShapesList) {
+            n.setZoom(factor);
+
+        }
+
+    }
 
 }
