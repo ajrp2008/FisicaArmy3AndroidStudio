@@ -9,6 +9,7 @@ import processing.test.fisicaarmy3.FisicaArmy3;
 public class TerrainGenerator {
 
     Table table;
+    ArrayList<NiveauShape> niveauShapesList = new ArrayList<>();
 
     public TerrainGenerator() {
         createTable();
@@ -30,10 +31,11 @@ public class TerrainGenerator {
                         NiveauShape l = new NiveauShape();
                         for (PVector p : shapeList)l.vertex(p.x, p.y);
                         FisicaArmy3.fiscaArmy3.world.add(l);
+                        niveauShapesList.add(l);
                     }
                     shapeList.clear();
                 } else {
-                    shapeList.add(new PVector(x*1.4f,y*1.4f));
+                    shapeList.add(new PVector(x*2f,y*2f));
                 }
             }}else{
             createTable();
@@ -47,6 +49,11 @@ public class TerrainGenerator {
         table.addColumn("y");
     }
 
+    public void updateMapPosition(float dx, float dy) {
+        for (NiveauShape n : niveauShapesList) {
+            n.setPosition(n.getX() + dx, n.getY() + dy);
+        }
+    }
 
 
 }

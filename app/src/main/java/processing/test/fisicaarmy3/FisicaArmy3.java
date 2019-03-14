@@ -1,18 +1,11 @@
 package processing.test.fisicaarmy3;
 
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
-
-import processing.core.*;
-
 import fisica.*;
 import processing.test.fisicaarmy3.army.ArmyMover;
 import processing.test.fisicaarmy3.army.Soldier;
 import processing.test.fisicaarmy3.army_archers_implementation.ArchersShootingArea;
 import processing.test.fisicaarmy3.army_archers_implementation.ArmyArchersMover;
 import processing.test.fisicaarmy3.army_archers_implementation.Arrow;
-import processing.test.fisicaarmy3.army_test_implementations.ArmyFootSoldiers;
 import processing.test.fisicaarmy3.gui.Button;
 import processing.test.fisicaarmy3.terrain.TerrainGenerator;
 import processing.test.fisicaarmy3.utils.GameConstants;
@@ -31,6 +24,8 @@ public class FisicaArmy3 extends PAppletFisicaArmy {
     private float buttonHeight = 100, buttonWidth = 300, buttonGap = 50, buttonTopGap = 50, buttonLeftGap = 50;
 
     private Button arrowsButton;
+
+    private TerrainGenerator terrain;
 
     //shoot arrows - debug test
     public static boolean shootArrowsFlag = false;
@@ -59,9 +54,8 @@ public class FisicaArmy3 extends PAppletFisicaArmy {
         ellipseMode(CENTER);
         GameConstants.initGameConstants();
 
-        TerrainGenerator t = new TerrainGenerator();
-        t.loadShapesFromTable();
-      //  t.saveToTable();
+        terrain = new TerrainGenerator();
+        terrain.loadShapesFromTable();
 
         armySelector = new ArmySelector();
         armySelector.addArmy(ArmyArchersMover.createArmy(100, 100, "A", 0, 255, 0));
@@ -76,7 +70,7 @@ public class FisicaArmy3 extends PAppletFisicaArmy {
     }
 
     public void draw() {
-        background(20,60,10,60);
+        background(70,110,60);
         //DEBUG TEXT
         textSize(40);
         fill(200, 0, 0);
@@ -99,25 +93,21 @@ public class FisicaArmy3 extends PAppletFisicaArmy {
 
     public void mousePressed() {
         if (zoomInButton.isPushed(mouseX, mouseY)) {
-            background(20,60,10);
 
             zoomInButton_click();
             return;
         }
         if (zoomOutButton.isPushed(mouseX, mouseY)) {
-            background(20,60,10);
 
             zoomOutButton_click();
             return;
         }
         if (resetButton.isPushed(mouseX, mouseY)) {
-            background(20,60,10);
 
             resetButton_click();
             return;
         }
         if (arrowsButton.isPushed(mouseX, mouseY)) {
-            background(20,60,10);
 
             arrowsButton_click();
             return;
@@ -169,6 +159,7 @@ public class FisicaArmy3 extends PAppletFisicaArmy {
 
     public void moveMap(float dx, float dy) {
         armySelector.updateMapPosition(dx, dy);
+        terrain.updateMapPosition(dx,dy);
     }
 
     public void contactStarted(FContact c) {

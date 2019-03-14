@@ -68,8 +68,8 @@ public class ArmySelector {
             //CENTER OF ARMY///////////////////////////
             PVector msp = a.getArmyCenter();
             FisicaArmy3.fiscaArmy3.noStroke();
-            if (a == selectedArmy) FisicaArmy3.fiscaArmy3.fill(255, 255, 0, 100);
-            else FisicaArmy3.fiscaArmy3.fill(30, 0, 0, 100);
+            if (a == selectedArmy) FisicaArmy3.fiscaArmy3.fill(255, 255, 0, 15);
+            else FisicaArmy3.fiscaArmy3.fill(30, 0, 0, 0);
             FisicaArmy3.fiscaArmy3.ellipse(msp.x, msp.y, GameConstants.armySelectorSize, GameConstants.armySelectorSize);
             FisicaArmy3.fiscaArmy3.stroke(255, 0, 0);
      /* if(a == selectedArmy){

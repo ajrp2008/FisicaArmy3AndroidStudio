@@ -22,8 +22,8 @@ public class ArchersShootingArea extends FCircle {
     public void draw(PGraphics pGraphics) {
         //super.draw(pGraphics);
         //HEADING ??
-        FisicaArmy3.fiscaArmy3.noFill();
-        FisicaArmy3.fiscaArmy3.ellipse(getX(),getY(), getSize(),getSize());
+       // FisicaArmy3.fiscaArmy3.noFill();
+       // FisicaArmy3.fiscaArmy3.ellipse(getX(),getY(), getSize(),getSize());
     }
 
     public String getName(){
