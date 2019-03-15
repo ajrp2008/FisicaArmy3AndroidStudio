@@ -2,17 +2,15 @@ class NiveauShape extends FPoly{
 
   ArrayList<PVector> vertexes = new ArrayList<PVector>();
   boolean isTouched = false;
-  float vertexSize=50;
   
-  NiveauShape(){
-    super();
-    setFill(0);
-    setSensor(true);
-    setGrabbable(false);
-    setFriction(1);
-  }
-  
-  
+    NiveauShape(){
+        super();
+        setFill(40,40);
+        setSensor(true);
+        setGrabbable(false);
+        setFriction(1);
+    }
+/*  
   public void draw(processing.core.PGraphics graphics){
 
       graphics.fill(0,vertexSize,0);
@@ -28,11 +26,10 @@ class NiveauShape extends FPoly{
     graphics.curveVertex(vertexes.get(vertexes.size()-1).x,vertexes.get(vertexes.size()-1).y);
    graphics.endShape();
   }
-  
+  */
   public void vertex(float x, float y){
     super.vertex(x,y);
     vertexes.add(new PVector(x,y));  
-    vertexSize = vertexSize +5;
   }
   
   void setTouched(boolean value){

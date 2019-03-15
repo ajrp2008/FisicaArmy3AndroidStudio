@@ -21,7 +21,7 @@ void setup() {
 }
 
 void draw() {
-  background(100);
+        background(70,110,60,180);
   textSize(40);
   text("soldier level:"+soldier.level, 50, 50);
 

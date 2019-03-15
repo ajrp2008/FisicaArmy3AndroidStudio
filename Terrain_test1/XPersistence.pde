@@ -42,10 +42,14 @@ class Persistence {
     newRow.setFloat("x", 10000);
     newRow.setFloat("y", 10000);
     for (PVector p : plist) {
-      newRow = table.addRow();
-      newRow.setFloat("x", p.x);
-      newRow.setFloat("y", p.y);
+      TableRow newRow2 = table.addRow();
+      newRow2.setFloat("x", p.x);
+      newRow2.setFloat("y", p.y);
     }
+    
+    TableRow newRow3 = table.addRow();
+    newRow3.setFloat("x", 10000);
+    newRow3.setFloat("y", 10000);
   }
 
   void saveToTable() {
