@@ -5,20 +5,14 @@ import org.jbox2d.common.Vec2;
 import java.util.ArrayList;
 import fisica.FPoly;
 import processing.core.*;
-import processing.test.fisicaarmy3.FisicaArmy3;
 
 
 class NiveauShape extends FPoly {
 
     ArrayList<PVector> vertexes = new ArrayList<PVector>();
-    boolean isTouched = false;
-    float vertexSize = 10;
-    static float numberNiveau = 10;
 
     NiveauShape(){
         super();
-        numberNiveau+=3;
-        //setFill(numberNiveau);
         setFill(40,40);
         setSensor(true);
         setGrabbable(false);
@@ -44,13 +38,11 @@ class NiveauShape extends FPoly {
     public void vertex(float x, float y){
         super.vertex(x,y);
         vertexes.add(new PVector(x,y));
-        vertexSize = vertexSize +10;
     }
 
     public void setZoom(float factor){
         for(Object v: this.m_vertices){
             ((Vec2)v).mulLocal(factor);
-            System.out.println("vertex er ændret!!" + m_vertices.indexOf(v));
         }
     }
 

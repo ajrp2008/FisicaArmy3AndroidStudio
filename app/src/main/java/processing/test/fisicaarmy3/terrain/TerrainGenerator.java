@@ -29,7 +29,7 @@ public class TerrainGenerator {
                 if (x==10000&&y==10000) {
                     if (shapeList.size()>3) {
                         NiveauShape l = new NiveauShape();
-                        for (PVector p : shapeList)l.vertex(p.x, p.y);
+                        for (PVector p : shapeList)l.vertex(p.x*0.5f, p.y*0.5f);
                         FisicaArmy3.fiscaArmy3.world.add(l);
                         niveauShapesList.add(l);
                     }

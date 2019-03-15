@@ -49,7 +49,7 @@ public class FisicaArmy3 extends PAppletFisicaArmy {
     private void initGame() {
         fiscaArmy3 = this;
         Fisica.init(this);
-        world = new FWorld();
+        world = new FWorld(-10000,-10000,10000,10000);
         world.setGravity(0, 0);
         ellipseMode(CENTER);
         GameConstants.initGameConstants();
