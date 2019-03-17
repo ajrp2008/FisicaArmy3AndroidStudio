@@ -64,6 +64,9 @@ public class ArmyMover implements ArmyMoverType {
 
     @Override
     public void display(boolean selected) {
+
+        if(!selected)return;
+
         soldierMover.updateArmyColors(selected);
         moverState.display(selected);
         Float heading = soldierMover.getArmyHeading();

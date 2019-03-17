@@ -17,4 +17,5 @@ interface SoldierType {
     void attack(Soldier opponent);
 
     void contactTellSuperior(FContact c);
+
 }

@@ -16,7 +16,7 @@ public static float zoomFactor;
 
 public static void initGameConstants(){
   //INITIAL CONDITIONS
-  soldierSpeedStart       = 30;
+  soldierSpeedStart       = 80;
   soldierSizeStart        = 4;
   armyGapSizeStart        = 6;
 

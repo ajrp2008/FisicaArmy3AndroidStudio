@@ -7,6 +7,7 @@ import processing.test.fisicaarmy3.army_archers_implementation.ArchersShootingAr
 import processing.test.fisicaarmy3.army_archers_implementation.ArmyArchersMover;
 import processing.test.fisicaarmy3.army_archers_implementation.Arrow;
 import processing.test.fisicaarmy3.gui.Button;
+import processing.test.fisicaarmy3.terrain.NiveauShape;
 import processing.test.fisicaarmy3.terrain.TerrainGenerator;
 import processing.test.fisicaarmy3.utils.GameConstants;
 
@@ -33,7 +34,7 @@ public class FisicaArmy3 extends PAppletFisicaArmy {
 
 
     public void setup() {
-
+        frameRate(60);
         initGame();
 
         zoomInButton = new Button(this, width - (buttonWidth + buttonLeftGap), (buttonTopGap), buttonWidth, buttonHeight);
@@ -165,7 +166,7 @@ public class FisicaArmy3 extends PAppletFisicaArmy {
 
     public void contactStarted(FContact c) {
 
-       // if(c.getBody1().getName().equals(c.getBody2().getName()))return; //DENNE LINJE KAN RYDDE OP I EN MASSE ....
+        // if(c.getBody1().getName().equals(c.getBody2().getName()))return; //DENNE LINJE KAN RYDDE OP I EN MASSE ....
 
         boolean soldierIsShot1 = c.getBody1() instanceof Arrow && c.getBody2() instanceof  Soldier;
         boolean soldierIsShot2 = c.getBody2() instanceof Arrow && c.getBody1() instanceof  Soldier;
@@ -192,7 +193,26 @@ public class FisicaArmy3 extends PAppletFisicaArmy {
             s1.contactTellSuperior(c);
             s2.contactTellSuperior(c);
         }
+
+
+
     }
+
+
+    void contactTerrain(FContact c, float addLevel) {
+        boolean case1 = c.getBody1() instanceof NiveauShape && c.getBody2() instanceof Soldier;
+        boolean case2 = c.getBody2() instanceof NiveauShape && c.getBody1() instanceof Soldier;
+
+        if (case1 || case2) {
+            NiveauShape n = case1 ? (NiveauShape)c.getBody1() :(NiveauShape)c.getBody2();
+            Soldier s = case1 ? (Soldier)c.getBody2() :(Soldier)c.getBody1();
+
+
+        }
+    }
+
+
+
 
     public void settings() {
        // size(1440, 2960);

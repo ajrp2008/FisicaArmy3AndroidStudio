@@ -5,16 +5,15 @@ import fisica.FContact;
 import processing.core.PApplet;
 import processing.core.PVector;
 import processing.test.fisicaarmy3.FisicaArmy3;
+import processing.test.fisicaarmy3.terrain.NiveauShape;
 import processing.test.fisicaarmy3.utils.GameConstants;
 
 public class Soldier extends FCircle implements SoldierType {
 
   PVector relPosition;
   private SoldiersMover army;
-
-  boolean  isAlive        = true;
-
-  private float    speed          = GameConstants.soldierSpeedStart;
+  boolean       isAlive     = true;
+  private float  speed       = GameConstants.soldierSpeedStart;
 
   public Soldier(SoldiersMover army, PVector relPos) {
     super(GameConstants.soldierSizeStart);
@@ -45,12 +44,23 @@ public class Soldier extends FCircle implements SoldierType {
     if (isMarching()) {
       PVector p  = new PVector(-getX()+(army.getAbsolutPosition().x + relPosition.x), -getY()+(army.getAbsolutPosition().y + relPosition.y));
       p.normalize();
-      p.mult(speed);
+      p.mult(speed*getTerrainFactor());
       setVelocity(p.x, p.y);
     } else {
       setVelocity(0, 0);
     }
   }
+
+  public float getTerrainFactor(){
+    float level = 1;
+
+    for(Object b : getTouching()){
+      if(b instanceof NiveauShape) level++;
+    }
+    return (1/level);
+
+  }
+
 
   @Override
   public PVector getRelPos() {

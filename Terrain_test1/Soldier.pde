@@ -1,11 +1,11 @@
 class Soldier extends FCircle{
   
-  float level = 1;
+  float TerrainLevel = 1;
   PVector targetPosition = new PVector();
   PVector speed = new PVector();
   
   Soldier(){
-    super(50);
+    super(10);
     this.setPosition(100,100);
     //world.add(this);
   }
@@ -22,7 +22,7 @@ class Soldier extends FCircle{
       speed.set(getX(),getY());
       speed.sub(targetPosition);
       speed.normalize();
-      speed.mult(-50/(level*0.5));
+      speed.mult(-100/(TerrainLevel*0.5));
       setVelocity(speed.x,speed.y);
     }
   }

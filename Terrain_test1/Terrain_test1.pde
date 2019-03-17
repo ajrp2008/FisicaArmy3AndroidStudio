@@ -23,7 +23,7 @@ void setup() {
 void draw() {
         background(70,110,60,180);
   textSize(40);
-  text("soldier level:"+soldier.level, 50, 50);
+  text("soldier level:"+soldier.TerrainLevel, 50, 50);
 
   world.step();
   world.draw();  
@@ -80,25 +80,25 @@ void createAShape() {
 }
 
 public void contactStarted(FContact c) {
-  contact(c, true, 1);
+  contactTerrain(c, true, 1);
 }
 
 public void contactPersisted(FContact c) {
-  contact(c, true, 0);
+  contactTerrain(c, true, 0);
 }
 
 public void contactEnded(FContact c) { 
-  contact(c, false, -1);
+  contactTerrain(c, false, -1);
 } 
 
-void contact(FContact c, boolean value, float addLevel) {
+void contactTerrain(FContact c, boolean value, float addLevel) {
   boolean case1 = c.getBody1() instanceof NiveauShape && c.getBody2() instanceof Soldier;
   boolean case2 = c.getBody2() instanceof NiveauShape && c.getBody1() instanceof Soldier;
 
   if (case1 || case2) {
     NiveauShape n = case1 ? (NiveauShape)c.getBody1() :(NiveauShape)c.getBody2();
     Soldier s = case1 ? (Soldier)c.getBody2() :(Soldier)c.getBody1();
-    s.level = s.level + addLevel;
+    s.TerrainLevel = s.TerrainLevel + addLevel;
     n.setTouched(value);
   }
 }

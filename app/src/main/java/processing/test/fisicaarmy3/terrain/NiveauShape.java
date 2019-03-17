@@ -7,7 +7,7 @@ import fisica.FPoly;
 import processing.core.*;
 
 
-class NiveauShape extends FPoly {
+public class NiveauShape extends FPoly {
 
     ArrayList<PVector> vertexes = new ArrayList<PVector>();
 
@@ -41,9 +41,8 @@ class NiveauShape extends FPoly {
     }
 
     public void setZoom(float factor){
-        for(Object v: this.m_vertices){
-            ((Vec2)v).mulLocal(factor);
-        }
+        for(Object v: this.m_vertices)((Vec2)v).mulLocal(factor);
+        this.recreateInWorld();
     }
 
 }

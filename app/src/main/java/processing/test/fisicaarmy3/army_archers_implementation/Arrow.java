@@ -30,7 +30,7 @@ public class Arrow extends FCircle {
         setPosition(x, y);
         start.set(x,y);
 
-        velocity.set(130, 0);
+        velocity.set(500, 0);
         velocity.rotate(angle);
         setVelocity(velocity.x, velocity.y);
 
