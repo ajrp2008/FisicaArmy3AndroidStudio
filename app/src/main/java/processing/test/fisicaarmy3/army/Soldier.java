@@ -35,7 +35,8 @@ public class Soldier extends FCircle implements SoldierType {
   @Override
   public void updateSoldierWhenInFormationPositionToZoom() {
     relPosition.mult(GameConstants.zoomFactor);
-    setPosition(army.getAbsolutPosition().x + relPosition.x, army.getAbsolutPosition().y + relPosition.y);
+    //setPosition(army.getAbsolutPosition().x + relPosition.x, army.getAbsolutPosition().y + relPosition.y);
+    setPosition(getX()*GameConstants.zoomFactor,getY()*GameConstants.zoomFactor);
   }
 
 
@@ -55,7 +56,7 @@ public class Soldier extends FCircle implements SoldierType {
     float level = 1;
 
     for(Object b : getTouching()){
-      if(b instanceof NiveauShape) level++;
+      if(b instanceof NiveauShape) level = level + 0.25f;
     }
     return (1/level);
 

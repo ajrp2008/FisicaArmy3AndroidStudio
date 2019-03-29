@@ -41,8 +41,9 @@ public class NiveauShape extends FPoly {
     }
 
     public void setZoom(float factor){
+        this.setPosition(getX()*factor,getY()*factor);
         for(Object v: this.m_vertices)((Vec2)v).mulLocal(factor);
-        this.recreateInWorld();
+        //this.recreateInWorld();
     }
 
 }

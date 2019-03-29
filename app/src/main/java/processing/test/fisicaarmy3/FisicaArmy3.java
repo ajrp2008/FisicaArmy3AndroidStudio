@@ -157,6 +157,12 @@ public class FisicaArmy3 extends PAppletFisicaArmy {
         GameConstants.zoomFactorAccumulated *= GameConstants.zoomFactor;
         armySelector.updateWithZoomFactor();
         terrain.zoom(zoom);
+
+        for(int i =  world.getBodies().size()-1;i>=0;i--){
+            FBody b = (FBody)world.getBodies().get(i);
+            b.recreateInWorld();
+        }
+
     }
 
     public void moveMap(float dx, float dy) {
