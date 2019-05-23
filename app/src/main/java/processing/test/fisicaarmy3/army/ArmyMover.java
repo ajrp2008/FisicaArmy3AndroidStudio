@@ -74,6 +74,7 @@ public class ArmyMover implements ArmyMoverType {
             PVector p = getArmyCenter();
             PVector p2= new PVector(GameConstants.armySelectorSize,0);
             p2.rotate(heading);
+            FisicaArmy3.fiscaArmy3.stroke(50);
             FisicaArmy3.fiscaArmy3.line(p.x,p.y,p.x+p2.x,p.y+p2.y);
         }
        // FisicaArmy3.fiscaArmy3.text(moverState.toString(),p.x+ GameConstants.armySelectorSize/2,p.y);

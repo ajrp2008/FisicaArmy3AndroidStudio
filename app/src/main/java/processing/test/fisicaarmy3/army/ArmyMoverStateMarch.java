@@ -95,22 +95,25 @@ class ArmyMoverStateMarch implements ArmyMoverState {
 
   public void display(boolean selected) {
     if (!wayPoints.isEmpty()) {
+
       FisicaArmy3.fiscaArmy3.noFill();
+        FisicaArmy3.fiscaArmy3.stroke(0);
+        FisicaArmy3.fiscaArmy3.strokeWeight(5);
 
       FisicaArmy3.fiscaArmy3.beginShape();
       PVector msp = armyMover.getArmyCenter();
       FisicaArmy3.fiscaArmy3.vertex(msp.x, msp.y);
       //FisicaArmy3.fiscaArmy3.vertex(armyMover.soldierMover.absolutPosition.x, armyMover.soldierMover.absolutPosition.y);
-      for (PVector p : wayPoints) {
-        if (armyMover.isNotStateWar()) {
-          FisicaArmy3.fiscaArmy3.vertex(p.x, p.y);
-        }
-      }
+//      for (PVector p : wayPoints) {
+//        if (armyMover.isNotStateWar()) {
+//          FisicaArmy3.fiscaArmy3.vertex(p.x, p.y);
+//        }
+//      }
       FisicaArmy3.fiscaArmy3.endShape();
       //FisicaArmy3.fiscaArmy3.ellipse(armyMover.soldierMover.absolutPosition.x, armyMover.soldierMover.absolutPosition.y, 3, 3);
       for (PVector p : wayPoints) {
         if (armyMover.isNotStateWar()) {
-          FisicaArmy3.fiscaArmy3.ellipse(p.x, p.y, 3, 3);
+          FisicaArmy3.fiscaArmy3.ellipse(p.x, p.y, 5, 5);
 
           if (wayPoints.indexOf(p) >= (wayPoints.size() - 1)) {
             FisicaArmy3.fiscaArmy3.ellipse(p.x, p.y, GameConstants.armySelectorSize, GameConstants.armySelectorSize);

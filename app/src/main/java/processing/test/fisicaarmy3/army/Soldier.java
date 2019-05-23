@@ -10,15 +10,24 @@ import processing.test.fisicaarmy3.utils.GameConstants;
 
 public class Soldier extends FCircle implements SoldierType {
 
+  PVector relPosition1 = new PVector(),relPosition2 = new PVector(),relPosition3 = new PVector(),relPosition4 = new PVector();;
+  float s = 15;
+
   PVector relPosition;
   private SoldiersMover army;
   boolean       isAlive     = true;
   private float  speed       = GameConstants.soldierSpeedStart;
+  private PVector velocityVector = new PVector();
+
+
 
   public Soldier(SoldiersMover army, PVector relPos) {
     super(GameConstants.soldierSizeStart);
     this.army         = army;
     this.relPosition  = relPos;
+   // this.relPosition1.set(relPos.x,relPos.y);
+   // this.relPosition2.set(relPos.x,relPos.y);
+  //  this.relPosition3.set(relPos.x,relPos.y);
     setPosition(army.getAbsolutPosition().x + relPos.x, army.getAbsolutPosition().y + relPos.y);
     setGrabbable(false);
     setDamping(0.25f);
@@ -26,15 +35,43 @@ public class Soldier extends FCircle implements SoldierType {
     FisicaArmy3.fiscaArmy3.world.add(this);
   }
 
-  @Override
+  public void draw(processing.core.PGraphics graphics) {
+
+    //if(this.army.)
+    FisicaArmy3.fiscaArmy3.noStroke();
+    FisicaArmy3.fiscaArmy3.fill(120,relPosition1.z);
+    FisicaArmy3.fiscaArmy3.ellipse(relPosition1.x, relPosition1.y,s,s);
+    FisicaArmy3.fiscaArmy3.fill(120,relPosition2.z);
+    FisicaArmy3.fiscaArmy3.ellipse(relPosition2.x, relPosition2.y,s*0.9f,s*0.9f);
+    FisicaArmy3.fiscaArmy3.fill(120,relPosition3.z);
+    FisicaArmy3.fiscaArmy3.ellipse(relPosition3.x, relPosition3.y,s*1.4f,s*1.4f);
+    FisicaArmy3.fiscaArmy3.fill(120,relPosition4.z);
+    FisicaArmy3.fiscaArmy3.ellipse(relPosition4.x, relPosition4.y,s*1.85f,s*1.85f);
+
+
+    super.draw(graphics);
+
+
+  }
+
+
+
+    @Override
   public void updateSoldierSizeToZoom() {
     speed *= GameConstants.zoomFactor;
     setSize(getSize()*GameConstants.zoomFactor);
+    s *=GameConstants.zoomFactor;
   }
 
   @Override
   public void updateSoldierWhenInFormationPositionToZoom() {
     relPosition.mult(GameConstants.zoomFactor);
+    relPosition1.mult(GameConstants.zoomFactor);
+    relPosition2.mult(GameConstants.zoomFactor);
+    relPosition3.mult(GameConstants.zoomFactor);
+    relPosition4.mult(GameConstants.zoomFactor);
+
+
     //setPosition(army.getAbsolutPosition().x + relPosition.x, army.getAbsolutPosition().y + relPosition.y);
     setPosition(getX()*GameConstants.zoomFactor,getY()*GameConstants.zoomFactor);
   }
@@ -43,11 +80,41 @@ public class Soldier extends FCircle implements SoldierType {
   @Override
   public void updatePosition() {
     if (isMarching()) {
-      PVector p  = new PVector(-getX()+(army.getAbsolutPosition().x + relPosition.x), -getY()+(army.getAbsolutPosition().y + relPosition.y));
-      p.normalize();
-      p.mult(speed*getTerrainFactor());
-      setVelocity(p.x, p.y);
+      velocityVector.set(-getX()+(army.getAbsolutPosition().x + relPosition.x), -getY()+(army.getAbsolutPosition().y + relPosition.y));
+      //PVector p  = new PVector(-getX()+(army.getAbsolutPosition().x + relPosition.x), -getY()+(army.getAbsolutPosition().y + relPosition.y));
+      velocityVector.normalize();
+      velocityVector.mult(speed*getTerrainFactor());
+      setVelocity(velocityVector.x, velocityVector.y);
+
+      if(relPosition1.z>80) {
+        relPosition4.set(relPosition3.x, relPosition3.y, relPosition3.z);
+        //if (relPosition3.z < 0 && relPosition2.z > 0)
+          relPosition3.set(relPosition2.x, relPosition2.y, relPosition2.z);
+        //if (relPosition2.z < 0 && relPosition1.z > 0)
+          relPosition2.set(relPosition1.x, relPosition1.y, relPosition1.z);
+       // if (relPosition1.z < 0)
+          relPosition1.set(getX(), getY(), 0);
+      }
+      relPosition1.set(relPosition1.x,relPosition1.y,relPosition1.z+3f);
+      relPosition2.set(relPosition2.x,relPosition2.y,relPosition2.z-1f);
+      relPosition3.set(relPosition3.x,relPosition3.y,relPosition3.z-1f);
+      relPosition4.set(relPosition4.x,relPosition4.y,relPosition4.z-1f);
+
+
     } else {
+
+      if(relPosition1.z>0)
+      relPosition1.set(relPosition1.x,relPosition1.y,relPosition1.z-0.5f);
+      if(relPosition2.z>0)
+      relPosition2.set(relPosition2.x,relPosition2.y,relPosition2.z-0.5f);
+      if(relPosition3.z>0)
+      relPosition3.set(relPosition3.x,relPosition3.y,relPosition3.z-0.5f);
+      if(relPosition4.z>0)
+      relPosition4.set(relPosition4.x,relPosition4.y,relPosition4.z-0.5f);
+
+
+
+
       setVelocity(0, 0);
     }
   }
