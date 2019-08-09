@@ -6,7 +6,7 @@ import processing.core.PVector;
 import processing.test.fisicaarmy3.army.ArmyMoverType;
 import processing.test.fisicaarmy3.utils.GameConstants;
 
-// indsat af jgj
+// indsat af jgj og ajrp
 
 public class ArmySelector {
     private ArmyMoverType selectedArmy = null;
